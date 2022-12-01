@@ -21,7 +21,7 @@ class App extends Component {
       return {key: movie.id, posterPath: movie['poster_path'], title: movie.title, rating: movie['average_rating']}
     })
     return (
-    <main>
+    <main className="App">
       <h1>Rancid Tomatillos</h1>
       <MoviesCardsContainer allMovieData={allMovieData}/>
     </main>

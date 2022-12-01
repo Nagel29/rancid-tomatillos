@@ -15,7 +15,7 @@ const MoviesCardsContainer = ({ allMovieData }) => {
     })
 
     return (
-        <div className="moviesCardsContainer">
+        <div className="MoviesCardsContainer">
             {allCards}
         </div>
     )

@@ -6,7 +6,7 @@ const Card = ({ key, posterPath, title, rating }) => {
         <div key={key}>
             <img src={posterPath} className="poster"></img>
             <p>{title}</p>
-            <p>{rating}</p>
+            <p>{rating.toFixed(2)}</p>
         </div>
     )
 }
