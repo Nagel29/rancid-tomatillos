@@ -1,5 +1,6 @@
 import React from 'react';
 import Card from '../Card/Card.js';
+import './MoviesCardsContainer.css';
 
 const MoviesCardsContainer = ({ allMovieData }) => {
     const allCards = allMovieData.map(movie => {
@@ -14,7 +15,7 @@ const MoviesCardsContainer = ({ allMovieData }) => {
     })
 
     return (
-        <div>
+        <div className="moviesCardsContainer">
             {allCards}
         </div>
     )

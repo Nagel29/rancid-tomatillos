@@ -18,7 +18,7 @@ class App extends Component {
 
   render() {
     const allMovieData = this.state.movies.map(movie => {
-      return {key: movie.id, posterPath: movie[poster_path], title: movie.title, rating: movie[average_rating]}
+      return {key: movie.id, posterPath: movie['poster_path'], title: movie.title, rating: movie['average_rating']}
     })
     return (
     <main>
