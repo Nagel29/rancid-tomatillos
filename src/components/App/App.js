@@ -3,8 +3,8 @@ import {movieData, oneMovie} from '../../movieData.js';
 import MoviesCardsContainer from '../MoviesCardsContainer/MoviesCardsContainer';
 import Details from '../Details/Details.js'
 import './App.css';
+import fetchData from '../../apiCalls.js'
 
-console.log(oneMovie)
 
 class App extends Component {
   constructor() {
@@ -13,17 +13,26 @@ class App extends Component {
       movies: [],
       movieDetails: {},
       showDetails: false,
-      showAllMovies: true
+      showAllMovies: true,
+      error: '',
+
     }
   }
 
   componentDidMount() {
-    this.setState({movies: movieData.movies})
+    Promise.resolve(fetchData('movies'))
+        .then(data => {
+          this.setState({movies: data.movies})
+        })
+        .catch(error => {
+          console.log(error)
+          this.setState({error: 'Something went wrong, please try again later.'})
+        })
   }
 
   displayDetails = (id) => {
-    this.setState({movies: [], movieDetails: oneMovie, showDetails: true, showAllMovies: false})
-    console.log("display the details")
+    Promise.resolve(fetchData(`movies/${id}`))
+      .then(data => this.setState({movies: [], movieDetails: data.movie, showDetails: true, showAllMovies: false}))
   }
 
   displayAllMovies = () => {
@@ -38,10 +47,11 @@ class App extends Component {
     <>
       <header>
         <h1>Rancid Tomatillos</h1>
+        {this.state.error && <h2>{this.state.error}</h2>}
         {this.state.showDetails && <button onClick={() => this.displayAllMovies()}>HOME</button>}
       </header>
       <main className="App">
-        {this.state.showDetails && <Details details={this.state.movieDetails.movie}/>}
+        {this.state.showDetails && <Details details={this.state.movieDetails}/>}
         {this.state.movies && <MoviesCardsContainer displayDetails={this.displayDetails}allMovieData={allMovieData}/>}
       </main>
     </>
