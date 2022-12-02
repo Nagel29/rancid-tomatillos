@@ -13,30 +13,29 @@ class App extends Component {
       movies: [],
       movieDetails: {},
       showDetails: false,
-      showAllMovies: true,
       error: '',
 
     }
   }
 
   componentDidMount() {
+    this.displayAllMovies()
+  }
+
+  displayDetails = (id) => {
+    Promise.resolve(fetchData(`movies/${id}`))
+      .then(data => this.setState({movies: [], movieDetails: data.movie, showDetails: true}))
+  }
+
+  displayAllMovies = () => {
     Promise.resolve(fetchData('movies'))
         .then(data => {
-          this.setState({movies: data.movies})
+          this.setState({movies: data.movies, movieData: {}, showDetails: false})
         })
         .catch(error => {
           console.log(error)
           this.setState({error: 'Something went wrong, please try again later.'})
         })
-  }
-
-  displayDetails = (id) => {
-    Promise.resolve(fetchData(`movies/${id}`))
-      .then(data => this.setState({movies: [], movieDetails: data.movie, showDetails: true, showAllMovies: false}))
-  }
-
-  displayAllMovies = () => {
-    this.setState({movies: movieData.movies, movieDetails: {}, showDetails: false, showAllMovies: true})
   }
 
   render() {
