@@ -3,8 +3,7 @@ import {movieData, oneMovie} from '../../movieData.js';
 import MoviesCardsContainer from '../MoviesCardsContainer/MoviesCardsContainer';
 import Details from '../Details/Details.js'
 import './App.css';
-
-console.log(oneMovie)
+import fetchData from '../../apiCalls.js'
 
 class App extends Component {
   constructor() {
@@ -19,31 +18,18 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetch('https://rancid-tomatillos.herokuapp.com/api/v2/movies')
-      .then(response => {
-        if (response.ok) {
-          return response.json()
-        } else {
-          throw new Error
-        }})
-      .then(data => {
-        this.setState({movies: data.movies})
-      })
-      .catch(error => {
-        console.log(error)
-        this.setState({error: 'Something went wrong, please try again later.'})
-      })
-
+    Promise.resolve(fetchData('movies'))
+        .then(data => {
+          this.setState({movies: data.movies})
+        })
+        .catch(error => {
+          console.log(error)
+          this.setState({error: 'Something went wrong, please try again later.'})
+        })
   }
 
   displayDetails = (id) => {
-    fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/${id}`)
-      .then(response => {
-        if (response.ok) {
-          return response.json()
-        } else {
-          throw new Error
-        }})
+    Promise.resolve(fetchData(`movies/${id}`))
       .then(data => this.setState({movies: [], movieDetails: data.movie, showDetails: true, showAllMovies: false}))
   }
 
