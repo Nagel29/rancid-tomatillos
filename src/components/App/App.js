@@ -5,6 +5,7 @@ import Details from '../Details/Details.js'
 import './App.css';
 import fetchData from '../../apiCalls.js'
 
+
 class App extends Component {
   constructor() {
     super()
@@ -14,6 +15,7 @@ class App extends Component {
       showDetails: false,
       showAllMovies: true,
       error: '',
+
     }
   }
 
@@ -31,6 +33,15 @@ class App extends Component {
   displayDetails = (id) => {
     Promise.resolve(fetchData(`movies/${id}`))
       .then(data => this.setState({movies: [], movieDetails: data.movie, showDetails: true, showAllMovies: false}))
+  }
+
+  displayAllMovies = () => {
+    this.setState({movies: movieData.movies, movieDetails: {}, showDetails: false, showAllMovies: true})
+  }
+
+  displayDetails = (id) => {
+    this.setState({movies: [], movieDetails: oneMovie, showDetails: true, showAllMovies: false})
+    console.log("display the details")
   }
 
   displayAllMovies = () => {
