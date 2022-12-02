@@ -19,7 +19,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetch('https://rancid-tomatillos.herokuapp.com/api/v2/moviesz')
+    fetch('https://rancid-tomatillos.herokuapp.com/api/v2/movies')
       .then(response => {
         if (response.ok) {
           return response.json()
@@ -37,8 +37,14 @@ class App extends Component {
   }
 
   displayDetails = (id) => {
-    this.setState({movies: [], movieDetails: oneMovie, showDetails: true, showAllMovies: false})
-    console.log("display the details")
+    fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/${id}`)
+      .then(response => {
+        if (response.ok) {
+          return response.json()
+        } else {
+          throw new Error
+        }})
+      .then(data => this.setState({movies: [], movieDetails: data.movie, showDetails: true, showAllMovies: false}))
   }
 
   displayAllMovies = () => {
@@ -57,7 +63,7 @@ class App extends Component {
         {this.state.showDetails && <button onClick={() => this.displayAllMovies()}>HOME</button>}
       </header>
       <main className="App">
-        {this.state.showDetails && <Details details={this.state.movieDetails.movie}/>}
+        {this.state.showDetails && <Details details={this.state.movieDetails}/>}
         {this.state.movies && <MoviesCardsContainer displayDetails={this.displayDetails}allMovieData={allMovieData}/>}
       </main>
     </>
