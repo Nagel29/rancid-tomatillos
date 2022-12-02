@@ -39,15 +39,6 @@ class App extends Component {
     this.setState({movies: movieData.movies, movieDetails: {}, showDetails: false, showAllMovies: true})
   }
 
-  displayDetails = (id) => {
-    this.setState({movies: [], movieDetails: oneMovie, showDetails: true, showAllMovies: false})
-    console.log("display the details")
-  }
-
-  displayAllMovies = () => {
-    this.setState({movies: movieData.movies, movieDetails: {}, showDetails: false, showAllMovies: true})
-  }
-
   render() {
     const allMovieData = this.state.movies.map(movie => {
       return {key: movie.id, posterPath: movie['poster_path'], title: movie.title, rating: movie['average_rating']}
