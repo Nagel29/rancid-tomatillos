@@ -1,3 +1,11 @@
 .poster {
     height: 200px;
+    border: solid black 1px;
+    box-shadow: 5px 5px 10px 5px rgb(43, 41, 41);
+}
+
+.poster:hover {
+ cursor: pointer;
+ border: solid 2px rgb(216, 58, 58);
+ opacity: 85%;
 }
