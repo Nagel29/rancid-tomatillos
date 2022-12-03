@@ -73,6 +73,7 @@ header {
   color:bisque;
   box-shadow: inset 0px 0px 10px #282625;
   padding-bottom: 20px;
+  z-index: 999;
 }
 
 main {

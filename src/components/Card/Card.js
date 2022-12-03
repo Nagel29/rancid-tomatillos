@@ -5,7 +5,8 @@ import './Card.css';
 
 const Card = ({ id, posterPath, title, rating, displayDetails }) => {
 
-    let ratingImage = rating < 6 ? rotten : good
+    let ratingImage = rating < 6 ? rotten : good;
+    
     return (
         <div>
             <h4>{title}</h4>
