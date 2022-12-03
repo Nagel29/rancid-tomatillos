@@ -1,6 +1,6 @@
 import React from 'react';
-import rotten from '../../spoiled-tomatillo.png'
-import good from '../../ripe-tomatillo.png'
+import rotten from '../../images/spoiled-tomatillo.png'
+import good from '../../images/ripe-tomatillo.png'
 import './Card.css';
 
 const Card = ({ id, posterPath, title, rating, displayDetails }) => {
