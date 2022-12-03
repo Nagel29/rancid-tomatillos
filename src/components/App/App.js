@@ -30,6 +30,13 @@ class App extends Component {
   displayAllMovies = () => {
     Promise.resolve(fetchData('movies'))
         .then(data => {
+          data.movies.sort((a, b) => {
+            if (a.title > b.title) {
+              return 1 
+            } else {
+              return -1
+            }
+          })
           this.setState({movies: data.movies, movieData: {}, showDetails: false})
         })
         .catch(error => {
