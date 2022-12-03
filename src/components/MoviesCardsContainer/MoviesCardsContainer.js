@@ -17,8 +17,11 @@ const MoviesCardsContainer = ({ allMovieData, displayDetails }) => {
     })
 
     return (
-        <div className="MoviesCardsContainer">
-            {allCards}
+        <div>
+            <h3>Click a poster to view more details!</h3>
+            <div className="MoviesCardsContainer">
+                {allCards}  
+            </div>
         </div>
     )
 }
