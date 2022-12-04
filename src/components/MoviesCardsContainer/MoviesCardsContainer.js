@@ -18,6 +18,7 @@ const MoviesCardsContainer = ({ allMovieData, displayDetails }) => {
 
     return (
         <div>
+            <h3 className='directions'>Click a poster to view more details!</h3>
             <div className="MoviesCardsContainer">
                 {allCards}  
             </div>

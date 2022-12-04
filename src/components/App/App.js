@@ -28,7 +28,7 @@ class App extends Component {
   }
 
   displayAllMovies = () => {
-    Promise.resolve(fetchData('movies'))
+    Promise.resolve(fetchData('movie'))
         .then(data => {
           data.movies.sort((a, b) => {
             if (a.title > b.title) {
@@ -41,7 +41,7 @@ class App extends Component {
         })
         .catch(error => {
           console.log(error)
-          this.setState({error: 'Something went wrong, please try again later.'})
+          this.setState({movies: [], error: 'Something went wrong, please try again later.'})
         })
   }
 
@@ -57,9 +57,8 @@ class App extends Component {
         {this.state.showDetails && <button className="home-button" onClick={() => this.displayAllMovies()}>HOME</button>}
       </header>
       <main className="App">
-        {!this.state.showDetails && <h3 className='directions'>Click a poster to view more details!</h3>}
         {this.state.showDetails && <Details details={this.state.movieDetails}/>}
-        {this.state.movies && <MoviesCardsContainer displayDetails={this.displayDetails}allMovieData={allMovieData}/>}
+        {this.state.movies.length > 0 && <MoviesCardsContainer displayDetails={this.displayDetails} allMovieData={allMovieData}/>}
       </main>
     </>
   )}
