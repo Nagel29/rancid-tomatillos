@@ -28,21 +28,31 @@ class App extends Component {
   }
 
   displayAllMovies = () => {
-    Promise.resolve(fetchData('movie'))
-        .then(data => {
-          data.movies.sort((a, b) => {
-            if (a.title > b.title) {
-              return 1 
-            } else {
-              return -1
-            }
-          })
-          this.setState({movies: data.movies, movieData: {}, showDetails: false})
-        })
-        .catch(error => {
-          console.log(error)
-          this.setState({movies: [], error: 'Something went wrong, please try again later.'})
-        })
+    Promise.resolve(fetchData('movies'))
+      .then(data => {
+        this.sortByRating(data)
+        this.setState({movies: data.movies, movieData: {}, showDetails: false})
+      })
+      .catch(error => {
+        console.log(error)
+        this.setState({movies: [], error: 'Something went wrong, please try again later.'})
+      })
+  }
+
+  sortByRating = (data) => {
+    data.movies.sort((a, b) => {
+      return b['average_rating'] - a['average_rating'];
+    })
+}
+
+  sortByTitle = (data) => {
+    data.movies.sort((a, b) => {
+      if (a.title > b.title) {
+        return 1 
+      } else {
+        return -1
+      }
+    })
   }
 
   render() {

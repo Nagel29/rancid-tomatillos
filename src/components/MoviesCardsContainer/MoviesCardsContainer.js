@@ -19,6 +19,13 @@ const MoviesCardsContainer = ({ allMovieData, displayDetails }) => {
     return (
         <div>
             <h3 className='directions'>Click a poster to view more details!</h3>
+            <div className="sort">
+                <p className="sort-by">Sort by:</p>
+                <div className="sortButtons">
+                    <button className="sort-button">Title (A-Z)</button>
+                    <button className="sort-button">Rating (Descending)</button>
+                </div>
+            </div>
             <div className="MoviesCardsContainer">
                 {allCards}  
             </div>
