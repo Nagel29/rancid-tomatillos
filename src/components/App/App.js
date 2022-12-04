@@ -42,6 +42,7 @@ class App extends Component {
           this.setState({showError: true, showDetails: false})
          
         })
+      }
 
   sortByRating = (data) => {
     data.sort((a, b) => {
@@ -82,7 +83,9 @@ class App extends Component {
         {this.state.movies.length > 0 && <MoviesCardsContainer displayDetails={this.displayDetails} allMovieData={allMovieData} sortByTitle={this.sortByTitle} sortByRating={this.sortByRating}/>}
       </main>
     </>
-  )}
+    )
+  }
 }
+
 
 export default App;
