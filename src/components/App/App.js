@@ -57,6 +57,7 @@ class App extends Component {
         {this.state.showDetails && <button className="home-button" onClick={() => this.displayAllMovies()}>HOME</button>}
       </header>
       <main className="App">
+        {!this.state.showDetails && <h3 className='directions'>Click a poster to view more details!</h3>}
         {this.state.showDetails && <Details details={this.state.movieDetails}/>}
         {this.state.movies && <MoviesCardsContainer displayDetails={this.displayDetails}allMovieData={allMovieData}/>}
       </main>
