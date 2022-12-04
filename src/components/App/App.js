@@ -30,8 +30,7 @@ class App extends Component {
   displayAllMovies = () => {
     Promise.resolve(fetchData('movies'))
       .then(data => {
-        this.sortByRating(data)
-        this.setState({movies: data.movies, movieData: {}, showDetails: false})
+        this.sortByTitle(data.movies)
       })
       .catch(error => {
         console.log(error)
@@ -40,24 +39,26 @@ class App extends Component {
   }
 
   sortByRating = (data) => {
-    data.movies.sort((a, b) => {
-      return b['average_rating'] - a['average_rating'];
+    data.sort((a, b) => {
+      return b.rating - a.rating;
     })
-}
+    this.setState({movies: data, movieDetails: {}, showDetails: false})
+  }
 
   sortByTitle = (data) => {
-    data.movies.sort((a, b) => {
+    data.sort((a, b) => {
       if (a.title > b.title) {
         return 1 
       } else {
         return -1
       }
     })
+    this.setState({movies: data, movieDetails: {}, showDetails: false})
   }
 
   render() {
     const allMovieData = this.state.movies.map(movie => {
-      return {key: movie.id, posterPath: movie['poster_path'], title: movie.title, rating: movie['average_rating']}
+      return {key: movie.id || movie.key, posterPath: movie['poster_path'] || movie.posterPath, title: movie.title, rating: movie['average_rating'] || movie.rating}
     })
     return (
     <>
@@ -68,7 +69,7 @@ class App extends Component {
       </header>
       <main className="App">
         {this.state.showDetails && <Details details={this.state.movieDetails}/>}
-        {this.state.movies.length > 0 && <MoviesCardsContainer displayDetails={this.displayDetails} allMovieData={allMovieData}/>}
+        {this.state.movies.length > 0 && <MoviesCardsContainer displayDetails={this.displayDetails} allMovieData={allMovieData} sortByTitle={this.sortByTitle} sortByRating={this.sortByRating}/>}
       </main>
     </>
   )}

@@ -82,6 +82,7 @@ header {
 main {
   padding-top: 170px;
   background-color: #e5d5c4;
+  min-height: 100vh;
 }
 
 /* section {
