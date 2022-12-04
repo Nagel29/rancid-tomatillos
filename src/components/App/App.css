@@ -60,12 +60,13 @@
  
 }
 
+
 h1 {
   margin: 0px;
   padding: 30px 0px 0px 0px;
   text-shadow: 3px 4px 5px black;
   font-size: 60px;
-  z-index: 1000;
+  z-index: 999;
 }
 
 header {
@@ -90,7 +91,3 @@ main {
   background-color: #e5d5c4;
 }
 
-/* section {
-  display: flex;
-  flex-direction: column;
-} */
