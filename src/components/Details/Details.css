@@ -1,0 +1,71 @@
+.poster-img {
+  height: 500px;
+  width: fit-content;
+  z-index: 999;
+}
+
+.details-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  z-index: 1;
+  padding: 50px;
+  height: 650px;
+}
+
+.details-content {
+  z-index: 500;
+  width: 850px;
+  /* text-align: left; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.title {
+  color: white;
+  font-size: 45px;
+  text-align: center;
+  padding: 0px;
+  margin: 0px;
+}
+
+.tagline {
+  font-size: 25px;
+  color: white;
+  margin-top: 10px;
+}
+
+.genre {
+  height: 35px;
+  font-size: 18px;
+  margin-right: 10px;
+  border-radius: 50px;
+  
+}
+
+.genre-tags {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+p {
+  color: white;
+  font-size: 20px;
+  margin-top: 2px;
+}
+
+.tagline {
+  text-align: center;
+}
+
+
+.overlay {
+  background-color: black;
+  opacity: .65;
+  height: 750px;
+  width: 100%;
+  position: absolute;
+}
