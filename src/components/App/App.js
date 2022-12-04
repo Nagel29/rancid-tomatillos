@@ -54,7 +54,7 @@ class App extends Component {
       <header>
         <h1>Rancid Tomatillos</h1>
         {this.state.error && <h2>{this.state.error}</h2>}
-        {this.state.showDetails && <button onClick={() => this.displayAllMovies()}>HOME</button>}
+        {this.state.showDetails && <button className="home-button" onClick={() => this.displayAllMovies()}>HOME</button>}
       </header>
       <main className="App">
         {this.state.showDetails && <Details details={this.state.movieDetails}/>}

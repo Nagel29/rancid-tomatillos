@@ -22,6 +22,7 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  z-index: 500;
 }
 
 .App-link {
@@ -37,7 +38,7 @@
   }
 }
 
-button {
+.home-button {
   float: right;
   margin: 15px;
   width: 7%;
@@ -48,7 +49,7 @@ button {
   font-size: 20px;
 }
 
-button:hover {
+.home-button:hover {
   cursor: pointer;
   background-color: aliceblue;
 }
@@ -61,7 +62,7 @@ h1 {
 }
 
 header {
-  height: 15%;
+  height: 150px;
   width: 100%;
   text-align: center;
   font-size: 125%;
@@ -77,6 +78,11 @@ header {
 }
 
 main {
-  padding-top: 12%;
+  padding-top: 170px;
   background-color: #e5d5c4;
+}
+
+section {
+  display: flex;
+  flex-direction: column;
 }
