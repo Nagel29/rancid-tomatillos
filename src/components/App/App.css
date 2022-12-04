@@ -54,12 +54,12 @@
   background-color: aliceblue;
 }
 
+
 .directions {
   margin: 50px 0px 50px 0px;
   font-size: 24px;
  
 }
-
 
 h1 {
   margin: 0px;
@@ -89,5 +89,6 @@ header {
 main {
   padding-top: 170px;
   background-color: #e5d5c4;
+  min-height: 100vh;
 }
 

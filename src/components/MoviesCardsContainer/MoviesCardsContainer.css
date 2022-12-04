@@ -5,3 +5,31 @@
     margin: 0px 30px 0px 30px;
     text-align: center;
 }
+
+.sort {
+    text-align: left;
+    padding: 0px 0px 15px 60px;
+    display: flex;
+    align-items: center;
+    border-bottom: solid black 1px;
+    color: black;
+    margin-bottom: 20px;
+}
+
+.sort-by {
+    margin: 0px 10px 0px 0px;
+    color: black;
+}
+
+.sort-button {
+    margin: 0px 10px 0px 0px;
+
+}
+
+.sort-button:hover {
+    cursor: pointer;
+}
+
+h3 {
+    margin: 25px 0px 0px 0px;
+}

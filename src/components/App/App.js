@@ -35,20 +35,30 @@ class App extends Component {
   displayAllMovies = () => {
     Promise.resolve(fetchData('movies'))
         .then(data => {
-          data.movies.sort((a, b) => {
-            if (a.title > b.title) {
-              return 1 
-            } else {
-              return -1
-            }
-          })
-          this.setState({movies: data.movies, movieData: {}, showDetails: false})
+        this.sortByTitle(data.movies)
         })
         .catch(error => {
           console.log(error)
           this.setState({showError: true, showDetails: false})
-          // console.log(this.state)
+         
         })
+
+  sortByRating = (data) => {
+    data.sort((a, b) => {
+      return b.rating - a.rating;
+    })
+    this.setState({movies: data, movieDetails: {}, showDetails: false})
+  }
+
+  sortByTitle = (data) => {
+    data.sort((a, b) => {
+      if (a.title > b.title) {
+        return 1 
+      } else {
+        return -1
+      }
+    })
+    this.setState({movies: data, movieDetails: {}, showDetails: false})
   }
 
   closeError = () => {
@@ -57,7 +67,7 @@ class App extends Component {
 
   render() {
     const allMovieData = this.state.movies.map(movie => {
-      return {key: movie.id, posterPath: movie['poster_path'], title: movie.title, rating: movie['average_rating']}
+      return {key: movie.id || movie.key, posterPath: movie['poster_path'] || movie.posterPath, title: movie.title, rating: movie['average_rating'] || movie.rating}
     })
     return (
     <>
@@ -68,10 +78,8 @@ class App extends Component {
         {this.state.showDetails && <button className="home-button" onClick={() => this.displayAllMovies()}>HOME</button>}
       </header>
       <main className="App">
-        {/* {this.state.showError &&  <Error />} */}
-        {!this.state.showDetails && <h3 className='directions'>Click a poster to view more details!</h3>}
         {this.state.showDetails && <Details details={this.state.movieDetails}/>}
-        {this.state.movies && <MoviesCardsContainer displayDetails={this.displayDetails}allMovieData={allMovieData}/>}
+        {this.state.movies.length > 0 && <MoviesCardsContainer displayDetails={this.displayDetails} allMovieData={allMovieData} sortByTitle={this.sortByTitle} sortByRating={this.sortByRating}/>}
       </main>
     </>
   )}
