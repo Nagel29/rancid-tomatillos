@@ -35,6 +35,7 @@ class App extends Component {
   displayAllMovies = () => {
     Promise.resolve(fetchData('movies'))
         .then(data => {
+        console.log(data)
         this.sortByTitle(data.movies)
         })
         .catch(error => {
