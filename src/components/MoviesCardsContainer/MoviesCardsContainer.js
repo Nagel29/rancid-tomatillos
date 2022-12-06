@@ -22,8 +22,8 @@ const MoviesCardsContainer = ({ allMovieData, displayDetails, sortByTitle, sortB
             <div className="sort">
                 <p className="sort-by">Sort by:</p>
                 <div className="sortButtons">
-                    <button className="sort-button" onClick={() => sortByTitle(allMovieData)}>Title (A-Z)</button>
-                    <button className="sort-button" onClick={() => sortByRating(allMovieData)}>Rating (Descending)</button>
+                    <button className="sort-button-title" onClick={() => sortByTitle(allMovieData)}>Title (A-Z)</button>
+                    <button className="sort-button-rating" onClick={() => sortByRating(allMovieData)}>Rating (Descending)</button>
                 </div>
             </div>
             <div className="MoviesCardsContainer">
