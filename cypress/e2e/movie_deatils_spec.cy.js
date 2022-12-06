@@ -6,11 +6,11 @@ describe("Movie details page", () => {
       fixture: "../fixtures/movies.json"
     })
     cy.visit('localhost:3000')
-    cy.get('.poster').eq(0).click()
     cy.intercept('https://rancid-tomatillos.herokuapp.com/api/v2/movies/694919', {
       method: "GET",
       fixture: "../fixtures/money_plane.json"
     })
+    cy.get('.poster').eq(0).click()
     
   })
   it('should display the title of the application', () => {
@@ -38,4 +38,33 @@ describe("Movie details page", () => {
     cy.get('.home-button').should('not.exist')
     cy.get('.MoviesCardsContainer').should('exist')
   })
+})
+
+describe("Movie details error display", () => {
+  beforeEach(() => {
+    cy.intercept('https://rancid-tomatillos.herokuapp.com/api/v2/movies', {
+      method: "GET",
+      fixture: "../fixtures/movies.json"
+    })
+
+    cy.intercept('https://rancid-tomatillos.herokuapp.com/api/v2/movies/694919', {
+      method: "GET"
+    },
+    {
+      statusCode: 500,
+    })
+    cy.visit('localhost:3000')
+    cy.get('.poster').eq(0).click()
+    
+  }) 
+
+  it('Should display the error', () => {
+    cy.get('.error').should('exist')
+    cy.get('.error-content').should('contain', 'Oops! Looks like there as a problem.')
+  })
+
+  it('Should go away after Dismiss button is clicked', () => {
+    cy.get('.dismissButton').click().should('not.exist')
+  })
+
 })

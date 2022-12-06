@@ -56,3 +56,27 @@ describe("All movies page testing", () => {
   })
 
 })
+
+
+describe("All movies error display", () => {
+  beforeEach(() => {
+    cy.intercept('https://rancid-tomatillos.herokuapp.com/api/v2/movies', {
+      method: "GET",
+    },
+    {
+      statusCode: 500,
+    })
+    cy.visit('localhost:3000')
+  }) 
+
+  it('Should display the error', () => {
+    cy.get('.error').should('exist')
+    cy.get('.error-content').should('contain', 'Oops! Looks like there as a problem.')
+  })
+
+  it('Should go away after Dismiss button is clicked', () => {
+    cy.get('.dismissButton').click().should('not.exist')
+  })
+
+
+}) 
