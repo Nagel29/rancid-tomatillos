@@ -8,7 +8,7 @@ const Card = ({ id, poster_path, title, rating, displayDetails }) => {
     let ratingImage = rating < 6 ? rotten : good;
     
     return (
-        <div>
+        <div className='card'>
             <h4>{title}</h4>
             <img  onClick={() => displayDetails(id)} src={poster_path} className="poster"></img>
             <section className="section-rating">

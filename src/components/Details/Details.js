@@ -13,7 +13,7 @@ const Details = ({ details }) => {
     return <button className='genre'>{genre}</button>
   })
   return (
-    <div style={styles}>
+    <div className='main-details' style={styles}>
       <div className='overlay'></div>
       <div className='details-container'>
         <img className='poster-img' name='posterPath' src={details['poster_path']}></img>
