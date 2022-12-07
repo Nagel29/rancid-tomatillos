@@ -5,6 +5,7 @@ import Details from '../Details/Details.js'
 import './App.css';
 import fetchData from '../../apiCalls.js'
 import Error from '../Error/Error.js'
+import { Route, BrowserRouter } from 'react-router-dom'
 
 
 class App extends Component {
@@ -24,7 +25,13 @@ class App extends Component {
 
   displayDetails = (id) => {
     Promise.resolve(fetchData(`movies/${id}`))
-      .then(data => this.setState({movies: [], movieDetails: data.movie, showDetails: true}))
+      .then(data => {
+        console.log(data.movie)
+        this.setState({movieDetails: data.movie})
+        console.log(this.state.movieDetails)
+        // console.log(data.movie)
+        // return data.movie
+      })
       .catch(error => {
         console.log(error)
         this.setState({showError: true, showDetails: false})
@@ -35,7 +42,7 @@ class App extends Component {
   displayAllMovies = () => {
     Promise.resolve(fetchData('movies'))
         .then(data => {
-        console.log(data)
+        // console.log(data)
         this.sortByTitle(data.movies)
         })
         .catch(error => {
@@ -72,18 +79,32 @@ class App extends Component {
       return {key: movie.id || movie.key, posterPath: movie['poster_path'] || movie.posterPath, title: movie.title, rating: movie['average_rating'] || movie.rating}
     })
     return (
-    <>
-      {this.state.showError && <Error closeError={this.closeError}/>}
-      <header>
-        <h1>Rancid Tomatillos</h1>
-        {this.state.error && <h2>{this.state.error}</h2>}
-        {this.state.showDetails && <button className="home-button" onClick={() => this.displayAllMovies()}>HOME</button>}
-      </header>
-      <main className="App">
-        {this.state.showDetails && <Details details={this.state.movieDetails}/>}
-        {this.state.movies.length > 0 && <MoviesCardsContainer displayDetails={this.displayDetails} allMovieData={allMovieData} sortByTitle={this.sortByTitle} sortByRating={this.sortByRating}/>}
-      </main>
-    </>
+    <BrowserRouter>
+      <>
+        {this.state.showError && <Error closeError={this.closeError}/>}
+        <header>
+          <h1>Rancid Tomatillos</h1>
+          {this.state.error && <h2>{this.state.error}</h2>}
+          {this.state.showDetails && <button className="home-button" onClick={() => this.displayAllMovies()}>HOME</button>}
+        </header>
+        <main className="App">
+          <Route path="/:movie" render={({ match }) => {
+            console.log("MOVIE ID", match.params.movie)
+            const id = parseInt(match.params.movie)
+            console.log(id)
+            this.displayDetails(id)
+            console.log(this.state.movieDetails)
+            
+          return <Details movie={this.state.movieDetails}/>
+        }
+        }/>
+          <Route exact path='/' render={ () => 
+          <MoviesCardsContainer displayDetails={this.displayDetails} allMovieData={allMovieData} sortByTitle={this.sortByTitle} sortByRating={this.sortByRating}/>
+        } 
+          />
+        </main>
+      </>
+    </BrowserRouter>
     )
   }
 }

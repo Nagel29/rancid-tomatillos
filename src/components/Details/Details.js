@@ -2,6 +2,7 @@ import React from 'react'
 import './Details.css'
 
 const Details = ({ details }) => {
+  console.log(details)
   const styles = {
     backgroundImage: `url(${details['backdrop_path']})`,
     backgroundRepeat: "no-repeat",
