@@ -28,6 +28,10 @@ class Details extends Component {
         console.log(this.state)
       })
   }
+
+  closeError = () => {
+    this.setState({showError: false})
+  }
   
   // displayDetails = (id) => {
     
@@ -48,7 +52,7 @@ class Details extends Component {
     }
     return (
       <div className='main-details' style={styles}>
-      {this.state.showError && <Error/>}
+      {this.state.showError && <Error closeError={this.closeError}/>}
         <div className='overlay'></div>
         <div className='details-container'>
           <img className='poster-img' name='posterPath' src={details['poster_path']}></img>
