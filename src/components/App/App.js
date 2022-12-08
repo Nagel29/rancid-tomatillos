@@ -13,7 +13,7 @@ class App extends Component {
     super()
     this.state = {
       movies: [],
-      movieDetails: {},
+      // movieDetails: {},
       showDetails: false,
       showError: false,
     }
@@ -23,21 +23,7 @@ class App extends Component {
     this.displayAllMovies()
   }
 
-  displayDetails = (id) => {
-    Promise.resolve(fetchData(`movies/${id}`))
-      .then(data => {
-        console.log(data.movie)
-        this.setState({movieDetails: data.movie})
-        console.log(this.state.movieDetails)
-        // console.log(data.movie)
-        // return data.movie
-      })
-      .catch(error => {
-        console.log(error)
-        this.setState({showError: true, showDetails: false})
-        // console.log(this.state)
-      })
-  }
+  
 
   displayAllMovies = () => {
     Promise.resolve(fetchData('movies'))
@@ -92,10 +78,7 @@ class App extends Component {
             console.log("MOVIE ID", match.params.movie)
             const id = parseInt(match.params.movie)
             console.log(id)
-            this.displayDetails(id)
-            console.log(this.state.movieDetails)
-            
-          return <Details movie={this.state.movieDetails}/>
+          return <Details id={id}/>
         }
         }/>
           <Route exact path='/' render={ () => 
