@@ -1,12 +1,15 @@
 import React, { Component } from 'react'
 import fetchData from '../../apiCalls.js'
 import './Details.css'
+import Error from '../Error/Error.js';
+import { Link } from 'react-router-dom';
 
 class Details extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      movieDetails: {}
+      movieDetails: {},
+      showError: false,
     }
   }
 
@@ -21,13 +24,11 @@ class Details extends Component {
       })
       .catch(error => {
         console.log(error)
-        // this.setState({showError: true, showDetails: false})
-        // console.log(this.state)
+        this.setState({showError: true})
+        console.log(this.state)
       })
   }
   
-  
-
   // displayDetails = (id) => {
     
   // }
@@ -47,6 +48,7 @@ class Details extends Component {
     }
     return (
       <div className='main-details' style={styles}>
+      {this.state.showError && <Error/>}
         <div className='overlay'></div>
         <div className='details-container'>
           <img className='poster-img' name='posterPath' src={details['poster_path']}></img>
@@ -60,6 +62,7 @@ class Details extends Component {
             <p>Movie Budget: ${details.budget}</p>
             <p>Box Office Revenue: ${details.revenue}</p>
             <p>Run time: {details.runtime} mins</p>
+            <Link to='/'><button className="home-button">HOME</button></Link>
           </div>
         </div>
       </div>

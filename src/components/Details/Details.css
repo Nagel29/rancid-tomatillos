@@ -69,3 +69,17 @@ p {
   width: 100%;
   position: absolute;
 }
+
+.home-button {
+  margin: 15px;
+  width: auto;
+  height: 25%;
+  background-color: #e3cfb6;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.home-button:hover {
+  cursor: pointer;
+  background-color: aliceblue;
+}

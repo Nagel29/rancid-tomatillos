@@ -5,7 +5,7 @@ import Details from '../Details/Details.js'
 import './App.css';
 import fetchData from '../../apiCalls.js'
 import Error from '../Error/Error.js'
-import { Route, BrowserRouter } from 'react-router-dom'
+import { Route, BrowserRouter, Link } from 'react-router-dom'
 
 
 class App extends Component {
@@ -23,8 +23,6 @@ class App extends Component {
     this.displayAllMovies()
   }
 
-  
-
   displayAllMovies = () => {
     Promise.resolve(fetchData('movies'))
         .then(data => {
@@ -36,7 +34,7 @@ class App extends Component {
           this.setState({showError: true, showDetails: false})
          
         })
-      }
+  }
 
   sortByRating = (data) => {
     data.sort((a, b) => {
@@ -69,9 +67,8 @@ class App extends Component {
       <>
         {this.state.showError && <Error closeError={this.closeError}/>}
         <header>
-          <h1>Rancid Tomatillos</h1>
+          <Link style={{color:'inherit', textDecoration: 'inherit'}} to='/'><h1>Rancid Tomatillos</h1></Link>
           {this.state.error && <h2>{this.state.error}</h2>}
-          {this.state.showDetails && <button className="home-button" onClick={() => this.displayAllMovies()}>HOME</button>}
         </header>
         <main className="App">
           <Route path="/:movie" render={({ match }) => {
@@ -82,7 +79,7 @@ class App extends Component {
         }
         }/>
           <Route exact path='/' render={ () => 
-          <MoviesCardsContainer displayDetails={this.displayDetails} allMovieData={allMovieData} sortByTitle={this.sortByTitle} sortByRating={this.sortByRating}/>
+          <MoviesCardsContainer allMovieData={allMovieData} sortByTitle={this.sortByTitle} sortByRating={this.sortByRating}/>
         } 
           />
         </main>
