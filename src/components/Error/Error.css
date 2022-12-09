@@ -37,6 +37,14 @@
   cursor: pointer;
 }
 
+.dismissButton:hover {
+  filter: brightness(130%)
+}
+
+.buttonLink {
+  width: 100%;
+}
+
 .main-overlay {
   width: 100vw;
   height: 100vh;

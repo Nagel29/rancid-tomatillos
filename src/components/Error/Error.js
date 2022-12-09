@@ -1,6 +1,7 @@
 import React from "react";
 import './Error.css'
-import errorIcon from '../../images/alert-icon.png'
+import errorIcon from '../../images/alert-icon.png';
+import { Link } from 'react-router-dom';
 
 const Error = ( { closeError }) => {
   return (
@@ -11,7 +12,7 @@ const Error = ( { closeError }) => {
           <h2>Oops! Looks like there as a problem.</h2>
           <h3>Please try again later.</h3>
         </div>
-        <button onClick={() => closeError()} className="dismissButton">Dismiss</button>
+        <Link to='/' className="buttonLink" onClick={() => closeError()}><button className="dismissButton">Dismiss</button></Link>
       </div>
     </div>
   )

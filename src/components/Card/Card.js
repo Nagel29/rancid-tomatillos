@@ -2,6 +2,7 @@ import React from 'react';
 import rotten from '../../images/spoiled-tomatillo.png'
 import good from '../../images/ripe-tomatillo.png'
 import './Card.css';
+import { Link } from 'react-router-dom'
 
 const Card = ({ id, poster_path, title, rating, displayDetails }) => {
 
@@ -10,7 +11,7 @@ const Card = ({ id, poster_path, title, rating, displayDetails }) => {
     return (
         <div className='card'>
             <h4>{title}</h4>
-            <img  onClick={() => displayDetails(id)} src={poster_path} className="poster"></img>
+            <Link to={`/${id}`}><img src={poster_path} className="poster"></img></Link>
             <section className="section-rating">
                 <img src={ratingImage} className="image-rating"></img>
                 {rating.toFixed(2)}

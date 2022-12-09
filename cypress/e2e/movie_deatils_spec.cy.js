@@ -1,16 +1,11 @@
 describe("Movie details page", () => {
   beforeEach(() => {
-    //we won't need this much of a set up with router, we will just need the updated URL
-    cy.intercept('https://rancid-tomatillos.herokuapp.com/api/v2/movies', {
-      method: "GET",
-      fixture: "../fixtures/movies.json"
-    })
-    cy.visit('localhost:3000')
     cy.intercept('https://rancid-tomatillos.herokuapp.com/api/v2/movies/694919', {
       method: "GET",
       fixture: "../fixtures/money_plane.json"
     })
-    cy.get('.poster').eq(0).click()
+    cy.visit('localhost:3000/694919')
+
     
   })
   it('should display the title of the application', () => {
@@ -42,19 +37,13 @@ describe("Movie details page", () => {
 
 describe("Movie details error display", () => {
   beforeEach(() => {
-    cy.intercept('https://rancid-tomatillos.herokuapp.com/api/v2/movies', {
-      method: "GET",
-      fixture: "../fixtures/movies.json"
-    })
-
     cy.intercept('https://rancid-tomatillos.herokuapp.com/api/v2/movies/694919', {
       method: "GET"
     },
     {
       statusCode: 500,
     })
-    cy.visit('localhost:3000')
-    cy.get('.poster').eq(0).click()
+    cy.visit('localhost:3000/694919')
     
   }) 
 
