@@ -14,7 +14,7 @@ class Details extends Component {
   }
 
   componentDidMount () {
-    fetchData(`movie/${this.props.id}`)
+    fetchData(`movies/${this.props.id}`)
       .then(data => {
         return this.setState({movieDetails: data.movie})
       

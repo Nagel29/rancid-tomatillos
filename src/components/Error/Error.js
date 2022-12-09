@@ -12,7 +12,7 @@ const Error = ( { closeError }) => {
           <h2>Oops! Looks like there as a problem.</h2>
           <h3>Please try again later.</h3>
         </div>
-        <Link to='/' onClick={() => closeError()}><button className="dismissButton">Dismiss</button></Link>
+        <Link to='/' className="buttonLink" onClick={() => closeError()}><button className="dismissButton">Dismiss</button></Link>
       </div>
     </div>
   )
