@@ -25,8 +25,8 @@ const Card = ({ id, poster_path, title, rating }) => {
 export default Card
 
 Card.propTypes = {
-    id: PropTypes.number,
-    poster_path: PropTypes.string,
-    title: PropTypes.string,
-    rating: PropTypes.number
+    id: PropTypes.number.isRequired,
+    poster_path: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    rating: PropTypes.number.isRequired
 }

@@ -36,9 +36,9 @@ const MoviesCardsContainer = ({ allMovieData, sortByTitle, sortByTitlePressed, s
 export default MoviesCardsContainer
 
 MoviesCardsContainer.propTypes = {
-    allMovieData: PropTypes.array,
-    sortByTitle: PropTypes.func,
-    sortByRating: PropTypes.func,
+    allMovieData: PropTypes.array.isRequired,
+    sortByTitle: PropTypes.func.isRequired,
+    sortByRating: PropTypes.func.isRequired,
     sortByTitlePressed: PropTypes.bool,
     sortByRatingPressed: PropTypes.bool 
 }

@@ -22,5 +22,5 @@ const Error = ( { closeError }) => {
 export default Error
 
 Error.propType = {
-  closeError: PropType.func
+  closeError: PropType.func.isRequired
 }

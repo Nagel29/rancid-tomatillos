@@ -66,7 +66,6 @@ class Details extends Component {
 export default Details
 
 Details.propTypes = {
-  id: PropTypes.number,
-  closeError: PropTypes.func,
-  key: PropTypes.number
+  id: PropTypes.number.isRequired,
+  closeError: PropTypes.func.isRequired
 }
