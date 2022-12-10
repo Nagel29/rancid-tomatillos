@@ -18,7 +18,7 @@ const MoviesCardsContainer = ({ allMovieData, displayDetails, sortByTitle, sortB
 
     return (
         <div>
-            <h3 className='directions'>Click a poster to view more details!</h3>
+            <h2 className='directions'>Click a poster to view more details!</h2>
             <div className="sort">
                 <p className="sort-by">Sort by:</p>
                 <div className="sortButtons">

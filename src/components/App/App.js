@@ -68,13 +68,11 @@ class App extends Component {
         {this.state.showError && <Error closeError={this.closeError}/>}
         <header>
           <Link style={{color:'inherit', textDecoration: 'inherit'}} to='/'><h1>Rancid Tomatillos</h1></Link>
-          {this.state.error && <h2>{this.state.error}</h2>}
+          {this.state.error && <h4>{this.state.error}</h4>}
         </header>
         <main className="App">
           <Route path="/:movie" render={({ match }) => {
-            console.log("MOVIE ID", match.params.movie)
             const id = parseInt(match.params.movie)
-            console.log(id)
           return <Details id={id}/>
         }
         }/>

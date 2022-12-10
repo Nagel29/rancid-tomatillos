@@ -55,18 +55,18 @@ class Details extends Component {
       {this.state.showError && <Error closeError={this.closeError}/>}
         <div className='overlay'></div>
         <div className='details-container'>
-          <img className='poster-img' name='posterPath' src={details['poster_path']}></img>
+          <img className='poster-img' name='posterPath' src={details['poster_path']} alt={`${details.title} poster image`}></img>
           <div className='details-content'>
-            <h3 className='title'>{details.title}</h3>
-            <h4 className='tagline'>{details.tagline}</h4>
+            <h2 className='title'>{details.title}</h2>
+            <h3 className='tagline'>{details.tagline}</h3>
             <div className='genre-tags'>{buttons}</div>
             <p>Summary: {details.overview}</p>
             <p>Release date: {details['release_date']}</p>
             <p>Rating: {details['average_rating']}</p>
-            <p>Movie Budget: ${details.budget}</p>
-            <p>Box Office Revenue: ${details.revenue}</p>
+            <p>Movie Budget: ${parseInt(details.budget, 10).toLocaleString("en-US")}</p>
+            <p>Box Office Revenue: ${parseInt(details.revenue, 10).toLocaleString("en-US")}</p>
             <p>Run time: {details.runtime} mins</p>
-            <Link to='/'><button className="home-button">HOME</button></Link>
+            <Link to='/' className="home-link"><button className="home-button">HOME</button></Link>
           </div>
         </div>
       </div>
