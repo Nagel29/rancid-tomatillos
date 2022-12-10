@@ -30,8 +30,8 @@ class Details extends Component {
   
   render () {
     const details = this.state.movieDetails
-    const buttons = Object.keys(details).length && details.genres.map(genre => {
-      return <button className='genre'>{genre}</button>
+    const buttons = Object.keys(details).length && details.genres.map((genre, index) => {
+      return <button key={index} className='genre'>{genre}</button>
     })
     const styles = {
       backgroundImage: `url(${details['backdrop_path']})`,
@@ -41,7 +41,7 @@ class Details extends Component {
     }
     return (
       <div className='main-details' aria-expanded={this.state.detailsOpen} style={styles}>
-      {this.state.showError && <Error key={this.props.id} closeError={this.props.closeError}/>}
+      {this.state.showError && <Error closeError={this.props.closeError}/>}
         <div className='overlay'></div>
         <div className='details-container'>
           <img className='poster-img' name='posterPath' src={details['poster_path']} alt={`${details.title} poster image`}></img>
