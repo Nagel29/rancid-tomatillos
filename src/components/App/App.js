@@ -13,7 +13,6 @@ class App extends Component {
     super()
     this.state = {
       movies: [],
-      // movieDetails: {},
       showDetails: false,
       showError: false,
       sortByTitlePressed: true,
@@ -28,7 +27,6 @@ class App extends Component {
   displayAllMovies = () => {
     Promise.resolve(fetchData('movies'))
         .then(data => {
-        // console.log(data)
         this.sortByTitle(data.movies)
         })
         .catch(error => {
@@ -77,7 +75,8 @@ class App extends Component {
         <main className="App">
           <Route path="/:movie" render={({ match }) => {
             const id = parseInt(match.params.movie)
-          return <Details id={id}/>
+            console.log(id)
+          return <Details id={id} closeError={this.closeError}/>
         }
         }/>
           <Route exact path='/' render={ () => 

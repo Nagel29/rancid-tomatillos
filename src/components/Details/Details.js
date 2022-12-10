@@ -17,11 +17,7 @@ class Details extends Component {
   componentDidMount () {
     fetchData(`movies/${this.props.id}`)
       .then(data => {
-        console.log(data.movie)
         return this.setState({movieDetails: data.movie, detailsOpen: true})
-        // console.log(this.state.movieDetails)
-        // console.log(data.movie)
-        // return data.movie
       })
       .catch(error => {
         console.log(error)
@@ -30,17 +26,8 @@ class Details extends Component {
       })
   }
 
-  closeError = () => {
-    this.setState({showError: false})
-  }
-  
-  // displayDetails = (id) => {
-    
-  // }
-
   
   render () {
-    console.log(this.state.movieDetails)
     const details = this.state.movieDetails
     const buttons = Object.keys(details).length && details.genres.map(genre => {
       return <button className='genre'>{genre}</button>
@@ -53,7 +40,7 @@ class Details extends Component {
     }
     return (
       <div className='main-details' aria-opened={this.state.detailsOpen} style={styles}>
-      {this.state.showError && <Error closeError={this.closeError}/>}
+      {this.state.showError && <Error closeError={this.props.closeError}/>}
         <div className='overlay'></div>
         <div className='details-container'>
           <img className='poster-img' name='posterPath' src={details['poster_path']} alt={`${details.title} poster image`}></img>
