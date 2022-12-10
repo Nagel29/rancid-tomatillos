@@ -2,9 +2,10 @@ import React from 'react';
 import rotten from '../../images/spoiled-tomatillo.png'
 import good from '../../images/ripe-tomatillo.png'
 import './Card.css';
+import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
-const Card = ({ id, poster_path, title, rating, displayDetails }) => {
+const Card = ({ id, poster_path, title, rating }) => {
 
     let ratingImage = rating < 6 ? rotten : good;
     let ratingAltText = rating < 6 ? 'rotten tomatillo' : 'fresh tomatillo'
@@ -22,3 +23,10 @@ const Card = ({ id, poster_path, title, rating, displayDetails }) => {
 }
 
 export default Card
+
+Card.propTypes = {
+    id: PropTypes.number,
+    poster_path: PropTypes.string,
+    title: PropTypes.string,
+    rating: PropTypes.number
+}

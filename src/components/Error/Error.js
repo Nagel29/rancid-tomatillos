@@ -2,6 +2,7 @@ import React from "react";
 import './Error.css'
 import errorIcon from '../../images/alert-icon.png';
 import { Link } from 'react-router-dom';
+import PropType from 'prop-types'
 
 const Error = ( { closeError }) => {
   return (
@@ -19,3 +20,7 @@ const Error = ( { closeError }) => {
 }
 
 export default Error
+
+Error.propType = {
+  closeError: PropType.func
+}

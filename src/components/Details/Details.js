@@ -3,6 +3,7 @@ import fetchData from '../../apiCalls.js'
 import './Details.css'
 import Error from '../Error/Error.js';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types'
 
 class Details extends Component {
   constructor(props) {
@@ -39,8 +40,8 @@ class Details extends Component {
       height: "750px",
     }
     return (
-      <div className='main-details' aria-opened={this.state.detailsOpen} style={styles}>
-      {this.state.showError && <Error closeError={this.props.closeError}/>}
+      <div className='main-details' aria-expanded={this.state.detailsOpen} style={styles}>
+      {this.state.showError && <Error key={this.props.id} closeError={this.props.closeError}/>}
         <div className='overlay'></div>
         <div className='details-container'>
           <img className='poster-img' name='posterPath' src={details['poster_path']} alt={`${details.title} poster image`}></img>
@@ -63,3 +64,9 @@ class Details extends Component {
 }
 
 export default Details
+
+Details.propTypes = {
+  id: PropTypes.number,
+  closeError: PropTypes.func,
+  key: PropTypes.number
+}
