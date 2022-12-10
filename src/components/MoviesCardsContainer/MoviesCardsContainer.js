@@ -2,7 +2,7 @@ import React from 'react';
 import Card from '../Card/Card.js';
 import './MoviesCardsContainer.css';
 
-const MoviesCardsContainer = ({ allMovieData, displayDetails, sortByTitle, sortByRating }) => {
+const MoviesCardsContainer = ({ allMovieData, displayDetails, sortByTitle, sortByTitlePressed, sortByRating, sortByRatingPressed }) => {
     const allCards = allMovieData.map(movie => {
         return (
             <Card
@@ -22,8 +22,8 @@ const MoviesCardsContainer = ({ allMovieData, displayDetails, sortByTitle, sortB
             <div className="sort">
                 <p className="sort-by">Sort by:</p>
                 <div className="sortButtons">
-                    <button className="sort-button-title" onClick={() => sortByTitle(allMovieData)}>Title (A-Z)</button>
-                    <button className="sort-button-rating" onClick={() => sortByRating(allMovieData)}>Rating (Descending)</button>
+                    <button className="sort-button-title" onClick={() => {sortByTitle(allMovieData)}} aria-pressed={sortByTitlePressed}>Title (A-Z)</button>
+                    <button className="sort-button-rating" onClick={() => sortByRating(allMovieData)} aria-pressed={sortByRatingPressed}>Rating (Descending)</button>
                 </div>
             </div>
             <div className="MoviesCardsContainer">

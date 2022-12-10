@@ -10,6 +10,7 @@ class Details extends Component {
     this.state = {
       movieDetails: {},
       showError: false,
+      detailsOpen: false,
     }
   }
 
@@ -17,7 +18,7 @@ class Details extends Component {
     fetchData(`movies/${this.props.id}`)
       .then(data => {
         console.log(data.movie)
-        return this.setState({movieDetails: data.movie})
+        return this.setState({movieDetails: data.movie, detailsOpen: true})
         // console.log(this.state.movieDetails)
         // console.log(data.movie)
         // return data.movie
@@ -51,7 +52,7 @@ class Details extends Component {
       height: "750px",
     }
     return (
-      <div className='main-details' style={styles}>
+      <div className='main-details' aria-opened={this.state.detailsOpen} style={styles}>
       {this.state.showError && <Error closeError={this.closeError}/>}
         <div className='overlay'></div>
         <div className='details-container'>

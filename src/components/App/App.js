@@ -16,6 +16,8 @@ class App extends Component {
       // movieDetails: {},
       showDetails: false,
       showError: false,
+      sortByTitlePressed: true,
+      sortByRatingPressed: false,
     }
   }
 
@@ -40,7 +42,8 @@ class App extends Component {
     data.sort((a, b) => {
       return b.rating - a.rating;
     })
-    this.setState({movies: data, movieDetails: {}, showDetails: false})
+    this.setState({movies: data, movieDetails: {}, showDetails: false, sortByTitlePressed: false,
+      sortByRatingPressed: true})
   }
 
   sortByTitle = (data) => {
@@ -51,7 +54,8 @@ class App extends Component {
         return -1
       }
     })
-    this.setState({movies: data, movieDetails: {}, showDetails: false})
+    this.setState({movies: data, movieDetails: {}, showDetails: false, sortByTitlePressed: true,
+      sortByRatingPressed: false})
   }
 
   closeError = () => {
@@ -77,7 +81,7 @@ class App extends Component {
         }
         }/>
           <Route exact path='/' render={ () => 
-          <MoviesCardsContainer allMovieData={allMovieData} sortByTitle={this.sortByTitle} sortByRating={this.sortByRating}/>
+          <MoviesCardsContainer allMovieData={allMovieData} sortByTitle={this.sortByTitle} sortByTitlePressed={this.state.sortByTitlePressed} sortByRating={this.sortByRating} sortByRatingPressed={this.state.sortByRatingPressed}/>
         } 
           />
         </main>
