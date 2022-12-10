@@ -15,6 +15,8 @@ class App extends Component {
       movies: [],
       showDetails: false,
       showError: false,
+      sortByTitlePressed: true,
+      sortByRatingPressed: false,
     }
   }
 
@@ -38,7 +40,8 @@ class App extends Component {
     data.sort((a, b) => {
       return b.rating - a.rating;
     })
-    this.setState({movies: data, movieDetails: {}, showDetails: false})
+    this.setState({movies: data, movieDetails: {}, showDetails: false, sortByTitlePressed: false,
+      sortByRatingPressed: true})
   }
 
   sortByTitle = (data) => {
@@ -49,7 +52,8 @@ class App extends Component {
         return -1
       }
     })
-    this.setState({movies: data, movieDetails: {}, showDetails: false})
+    this.setState({movies: data, movieDetails: {}, showDetails: false, sortByTitlePressed: true,
+      sortByRatingPressed: false})
   }
 
   closeError = () => {
@@ -66,18 +70,17 @@ class App extends Component {
         {this.state.showError && <Error closeError={this.closeError}/>}
         <header>
           <Link style={{color:'inherit', textDecoration: 'inherit'}} to='/'><h1>Rancid Tomatillos</h1></Link>
-          {this.state.error && <h2>{this.state.error}</h2>}
+          {this.state.error && <h4>{this.state.error}</h4>}
         </header>
         <main className="App">
           <Route path="/:movie" render={({ match }) => {
-            console.log("MOVIE ID", match.params.movie)
             const id = parseInt(match.params.movie)
             console.log(id)
           return <Details id={id} closeError={this.closeError}/>
         }
         }/>
           <Route exact path='/' render={ () => 
-          <MoviesCardsContainer allMovieData={allMovieData} sortByTitle={this.sortByTitle} sortByRating={this.sortByRating}/>
+          <MoviesCardsContainer allMovieData={allMovieData} sortByTitle={this.sortByTitle} sortByTitlePressed={this.state.sortByTitlePressed} sortByRating={this.sortByRating} sortByRatingPressed={this.state.sortByRatingPressed}/>
         } 
           />
         </main>

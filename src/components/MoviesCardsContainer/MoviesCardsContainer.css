@@ -30,6 +30,10 @@
     cursor: pointer;
 }
 
-h3 {
+.pressed {
+    opacity: .2;
+}
+
+h2 {
     margin: 25px 0px 0px 0px;
 }
