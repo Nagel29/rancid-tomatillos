@@ -31,8 +31,7 @@ class App extends Component {
         .then(data => {
           const cleanedData = cleanData(data)
           this.sortByTitle(cleanedData.movies)})
-        .catch(error => {
-          console.log(error)
+        .catch(response => {
           this.setState({errorStatus: response.status, errorText: response.statusText, showDetails: false})
         })
   }
@@ -77,7 +76,6 @@ class App extends Component {
         <main className="App">
           <Route path="/:movie" render={({ match }) => {
             const id = parseInt(match.params.movie)
-            console.log(id)
           return <Details id={id} closeError={this.closeError}/>
         }
         }/>
