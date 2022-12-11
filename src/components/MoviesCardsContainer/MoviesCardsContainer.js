@@ -1,8 +1,9 @@
 import React from 'react';
 import Card from '../Card/Card.js';
+import PropTypes from 'prop-types'
 import './MoviesCardsContainer.css';
 
-const MoviesCardsContainer = ({ allMovieData, displayDetails, sortByTitle, sortByTitlePressed, sortByRating, sortByRatingPressed }) => {
+const MoviesCardsContainer = ({ allMovieData, sortByTitle, sortByTitlePressed, sortByRating, sortByRatingPressed }) => {
     const allCards = allMovieData.map(movie => {
         return (
             <Card
@@ -11,7 +12,6 @@ const MoviesCardsContainer = ({ allMovieData, displayDetails, sortByTitle, sortB
                 poster_path={movie.posterPath}
                 title={movie.title}
                 rating={movie.rating}
-                displayDetails={displayDetails}
             />
         )
     })
@@ -22,8 +22,8 @@ const MoviesCardsContainer = ({ allMovieData, displayDetails, sortByTitle, sortB
             <div className="sort">
                 <p className="sort-by">Sort by:</p>
                 <div className="sortButtons">
-                    <button className={sortByTitlePressed && 'pressed'} onClick={() => sortByTitle(allMovieData)} aria-pressed={sortByTitlePressed}>Title (A-Z)</button>
-                    <button className={sortByRatingPressed && 'pressed'} onClick={() => sortByRating(allMovieData)} aria-pressed={sortByRatingPressed}>Rating (Descending)</button>
+                    <button className={sortByTitlePressed ? 'pressed' : 'sort-button-title'} onClick={() => sortByTitle(allMovieData)} aria-pressed={sortByTitlePressed}>Title (A-Z)</button>
+                    <button className={sortByRatingPressed ? 'pressed' : 'sort-button-rating'} onClick={() => sortByRating(allMovieData)} aria-pressed={sortByRatingPressed}>Rating (Descending)</button>
                 </div>
             </div>
             <div className="MoviesCardsContainer">
@@ -34,3 +34,11 @@ const MoviesCardsContainer = ({ allMovieData, displayDetails, sortByTitle, sortB
 }
 
 export default MoviesCardsContainer
+
+MoviesCardsContainer.propTypes = {
+    allMovieData: PropTypes.array.isRequired,
+    sortByTitle: PropTypes.func.isRequired,
+    sortByRating: PropTypes.func.isRequired,
+    sortByTitlePressed: PropTypes.bool,
+    sortByRatingPressed: PropTypes.bool 
+}

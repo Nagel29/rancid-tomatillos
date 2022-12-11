@@ -3,7 +3,7 @@
 }
 
 .poster {
-    height: 200px;
+    height: 300px;
     border: solid black 1px;
     box-shadow: 5px 5px 10px 5px rgb(43, 41, 41);
 }
@@ -20,6 +20,13 @@
     align-items: center;
     font-weight: bold;
     margin: 0px 10px 20px 0px;
+}
+
+.poster-title {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 h4 {
