@@ -59,7 +59,7 @@ describe("All movies page testing", () => {
 })
 
 
-describe("All movies error display", () => {
+describe("All movies server error display", () => {
   beforeEach(() => {
     cy.intercept('https://rancid-tomatillos.herokuapp.com/api/v2/movies', {
       method: "GET",
@@ -70,7 +70,7 @@ describe("All movies error display", () => {
     cy.visit('localhost:3000')
   }) 
 
-  it('Should display the error', () => {
+  it('Should display the server error', () => {
     cy.get('.error').should('exist')
     cy.get('.error-content').should('contain', 'Oops! Looks like there as a problem.')
   })
@@ -78,6 +78,28 @@ describe("All movies error display", () => {
   it('Should go away after Dismiss button is clicked', () => {
     cy.get('.dismissButton').click().should('not.exist')
   })
-
-
 }) 
+
+
+  describe("All movies client side error", () => {
+    beforeEach(() => {
+      cy.intercept('https://rancid-tomatillos.herokuapp.com/api/v2/movies', {
+        method: "GET"
+      },
+      {
+        statusCode: 404,
+      })
+      cy.visit('localhost:3000')
+    })
+  
+    it('Should display the server error', () => {
+      cy.get('.error').should('exist')
+      cy.get('.error-content').should('contain', 'Uh oh.. This page doesn\'t exist. Please try again.')
+        .and('contain', "404 Not Found")
+    })
+  
+    it('Should go away after Dismiss button is clicked', () => {
+      cy.get('.dismissButton').click().should('not.exist')
+    })
+  })
+
