@@ -12,7 +12,7 @@ const Card = ({ id, posterPath, title, rating }) => {
     
     return (
         <div className='card'>
-            <h3>{title}</h3>
+            <h3 className='poster-title'>{title}</h3>
             <Link to={`/${id}`}><img src={posterPath} alt={title} className="poster"></img></Link>
             <section className="section-rating">
                 <img src={ratingImage} alt={ratingAltText} className="image-rating"></img>

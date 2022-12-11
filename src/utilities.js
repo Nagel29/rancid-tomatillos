@@ -1,5 +1,5 @@
 const cleanData = (data) => {
-    // console.log(data)
+    
     const cleanedData = data.movies.reduce((acc, movie) => {
         acc.movies.push({
             id: movie.id,
@@ -9,7 +9,7 @@ const cleanData = (data) => {
             rating: movie['average_rating'],
         })
         return acc;
-    }, {movies: []})
+    }, { movies: [] })
 
     return cleanedData;
 }
