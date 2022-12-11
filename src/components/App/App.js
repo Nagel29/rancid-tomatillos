@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import {movieData, oneMovie} from '../../movieData.js';
-import MoviesCardsContainer from '../MoviesCardsContainer/MoviesCardsContainer';
-import Details from '../Details/Details.js'
 import './App.css';
-import fetchData from '../../apiCalls.js'
-import Error from '../Error/Error.js'
+import MoviesCardsContainer from '../MoviesCardsContainer/MoviesCardsContainer';
+import Details from '../Details/Details.js';
+import fetchData from '../../apiCalls.js';
+import Error from '../Error/Error.js';
 import { Route, BrowserRouter, Link } from 'react-router-dom'
+
+import cleanData from '../../utilities.js';
 
 
 class App extends Component {
@@ -28,12 +29,10 @@ class App extends Component {
   displayAllMovies = () => {
     Promise.resolve(fetchData('movies'))
         .then(data => {
-        this.sortByTitle(data.movies)
-        })
-        .catch((response) => {
-          console.log(response)
-          console.log(response.status)
-          console.log(response.statusText)
+          const cleanedData = cleanData(data)
+          this.sortByTitle(cleanedData.movies)})
+        .catch(error => {
+          console.log(error)
           this.setState({errorStatus: response.status, errorText: response.statusText, showDetails: false})
         })
   }
@@ -48,13 +47,15 @@ class App extends Component {
   sortByTitle = (data) => {
     data.sort((a, b) => {
       if (a.title > b.title) {
-        return 1 
+        return 1
       } else {
         return -1
       }
     })
-    this.setState({movies: data, movieDetails: {}, showDetails: false, sortByTitlePressed: true,
-      sortByRatingPressed: false})
+    this.setState({
+      movies: data, movieDetails: {}, sortByTitlePressed: true,
+      sortByRatingPressed: false
+    })
   }
 
   closeError = () => {
@@ -63,7 +64,7 @@ class App extends Component {
 
   render() {
     const allMovieData = this.state.movies.map(movie => {
-      return {key: movie.id || movie.key, posterPath: movie['poster_path'] || movie.posterPath, title: movie.title, rating: movie['average_rating'] || movie.rating}
+      return { id: movie.id, posterPath: movie.posterPath, title: movie.title, rating: movie.rating }
     })
     return (
     <BrowserRouter>

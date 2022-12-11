@@ -1,7 +1,7 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 import './Error.css'
 import errorIcon from '../../images/alert-icon.png';
-import { Link } from 'react-router-dom';
 import PropType from 'prop-types'
 
 const Error = ( { closeError, status, text }) => {

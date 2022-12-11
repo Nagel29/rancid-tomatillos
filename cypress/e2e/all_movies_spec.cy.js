@@ -6,7 +6,7 @@ describe("All movies page testing", () => {
     })
     cy.visit('localhost:3000')
   })
-  
+
   it('should display the title of the application', () => {
     cy.contains("Rancid Tomatillos")
   })
@@ -64,11 +64,11 @@ describe("All movies server error display", () => {
     cy.intercept('https://rancid-tomatillos.herokuapp.com/api/v2/movies', {
       method: "GET",
     },
-    {
-      statusCode: 500,
-    })
+      {
+        statusCode: 500,
+      })
     cy.visit('localhost:3000')
-  }) 
+  })
 
   it('Should display the server error', () => {
     cy.get('.error').should('exist')

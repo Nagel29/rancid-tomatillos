@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
-import fetchData from '../../apiCalls.js'
-import './Details.css'
-import Error from '../Error/Error.js';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types'
+import './Details.css';
+import fetchData from '../../apiCalls.js';
+import Error from '../Error/Error.js';
+import PropTypes from 'prop-types';
 
 class Details extends Component {
   constructor(props) {
@@ -16,18 +16,17 @@ class Details extends Component {
     }
   }
 
-  componentDidMount () {
+  componentDidMount() {
     fetchData(`movies/${this.props.id}`)
       .then(data => {
-        return this.setState({movieDetails: data.movie, detailsOpen: true})
+        return this.setState({ movieDetails: data.movie, detailsOpen: true })
       })
       .catch(response => {
         this.setState({errorStatus: response.status, errorText: response.statusText})
       })
   }
 
-  
-  render () {
+  render() {
     const details = this.state.movieDetails
     const buttons = Object.keys(details).length && details.genres.map((genre, index) => {
       return <button key={index} className='genre'>{genre}</button>
@@ -40,7 +39,7 @@ class Details extends Component {
     }
     return (
       <div className='main-details' aria-expanded={this.state.detailsOpen} style={styles}>
-      {this.state.errorStatus > 400 && <Error status={this.state.errorStatus} text={this.state.errorText} closeError={this.props.closeError}/>}
+      {this.state.errorStatus >= 400 && <Error status={this.state.errorStatus} text={this.state.errorText} closeError={this.props.closeError}/>}
         <div className='overlay'></div>
         <div className='details-container'>
           <img className='poster-img' name='posterPath' src={details['poster_path']} alt={`${details.title} poster image`}></img>

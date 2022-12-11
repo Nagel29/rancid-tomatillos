@@ -16,7 +16,6 @@
 .details-content {
   z-index: 500;
   width: 850px;
-  /* text-align: left; */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -41,7 +40,6 @@
   font-size: 18px;
   margin-right: 10px;
   border-radius: 50px;
-  
 }
 
 .genre-tags {

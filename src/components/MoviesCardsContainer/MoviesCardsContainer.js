@@ -7,9 +7,9 @@ const MoviesCardsContainer = ({ allMovieData, sortByTitle, sortByTitlePressed, s
     const allCards = allMovieData.map(movie => {
         return (
             <Card
-                id={movie.key}
-                key={movie.key}
-                poster_path={movie.posterPath}
+                id={movie.id}
+                key={movie.id}
+                posterPath={movie.posterPath}
                 title={movie.title}
                 rating={movie.rating}
             />
@@ -27,7 +27,7 @@ const MoviesCardsContainer = ({ allMovieData, sortByTitle, sortByTitlePressed, s
                 </div>
             </div>
             <div className="MoviesCardsContainer">
-                {allCards}  
+                {allCards}
             </div>
         </div>
     )
@@ -40,5 +40,5 @@ MoviesCardsContainer.propTypes = {
     sortByTitle: PropTypes.func.isRequired,
     sortByRating: PropTypes.func.isRequired,
     sortByTitlePressed: PropTypes.bool,
-    sortByRatingPressed: PropTypes.bool 
+    sortByRatingPressed: PropTypes.bool
 }
