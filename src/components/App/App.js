@@ -14,9 +14,10 @@ class App extends Component {
     this.state = {
       movies: [],
       showDetails: false,
-      showError: false,
+      errorStatus: 0,
+      errorText: "",
       sortByTitlePressed: true,
-      sortByRatingPressed: false,
+      sortByRatingPressed: false
     }
   }
 
@@ -29,10 +30,11 @@ class App extends Component {
         .then(data => {
         this.sortByTitle(data.movies)
         })
-        .catch(error => {
-          console.log(error)
-          this.setState({showError: true, showDetails: false})
-         
+        .catch((response) => {
+          console.log(response)
+          console.log(response.status)
+          console.log(response.statusText)
+          this.setState({errorStatus: response.status, errorText: response.statusText, showDetails: false})
         })
   }
 
@@ -57,7 +59,7 @@ class App extends Component {
   }
 
   closeError = () => {
-    this.setState({showError: false})
+    this.setState({errorStatus: 200, errorText: ""})
   }
 
   render() {
@@ -67,7 +69,7 @@ class App extends Component {
     return (
     <BrowserRouter>
       <>
-        {this.state.showError && <Error closeError={this.closeError}/>}
+        {this.state.errorStatus > 400 && <Error status={this.state.errorStatus} text={this.state.errorText} closeError={this.closeError}/>}
         <header>
           <Link style={{color:'inherit', textDecoration: 'inherit'}} to='/'><h1>Rancid Tomatillos</h1></Link>
           {this.state.error && <h4>{this.state.error}</h4>}
