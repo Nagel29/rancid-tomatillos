@@ -5,6 +5,8 @@ import MoviesCardsContainer from '../MoviesCardsContainer/MoviesCardsContainer';
 import Details from '../Details/Details.js';
 import fetchData from '../../apiCalls.js';
 import Error from '../Error/Error.js';
+import { Route, BrowserRouter, Link } from 'react-router-dom'
+
 import cleanData from '../../utilities.js';
 
 
