@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Route, BrowserRouter, Link } from 'react-router-dom';
 import './App.css';
 import MoviesCardsContainer from '../MoviesCardsContainer/MoviesCardsContainer';
 import Details from '../Details/Details.js';
