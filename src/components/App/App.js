@@ -42,8 +42,7 @@ class App extends Component {
     data.sort((a, b) => {
       return b.rating - a.rating;
     })
-    this.setState({movies: data, movieDetails: {}, showDetails: false, sortByTitlePressed: false,
-      sortByRatingPressed: true})
+    this.setState({movies: data, movieDetails: {}, showDetails: false, sortByTitlePressed: false, sortByRatingPressed: true})
   }
 
   sortByTitle = (data) => {
