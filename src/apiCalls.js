@@ -1,10 +1,10 @@
 const fetchData = (endPoint) => {
     return fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/${endPoint}`)
       .then(response => {
-        if (response.ok) {
-          return response.json()
+        if (response.status > 400) {
+          throw response
         } else {
-          throw new Error
+          return response.json()
         }})
 }
 

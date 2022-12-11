@@ -35,7 +35,7 @@ describe("Movie details page", () => {
   })
 })
 
-describe("Movie details error display", () => {
+describe("Movie details server error display", () => {
   beforeEach(() => {
     cy.intercept('https://rancid-tomatillos.herokuapp.com/api/v2/movies/694919', {
       method: "GET"
@@ -46,7 +46,7 @@ describe("Movie details error display", () => {
     cy.visit('localhost:3000/694919')
   })
 
-  it('Should display the error', () => {
+  it('Should display the server error', () => {
     cy.get('.error').should('exist')
     cy.get('.error-content').should('contain', 'Oops! Looks like there as a problem.')
   })
@@ -55,4 +55,26 @@ describe("Movie details error display", () => {
     cy.get('.dismissButton').click().should('not.exist')
   })
 
+})
+
+describe("Movie details client side error", () => {
+  beforeEach(() => {
+    cy.intercept('https://rancid-tomatillos.herokuapp.com/api/v2/movies/694919', {
+      method: "GET"
+    },
+    {
+      statusCode: 404,
+    })
+    cy.visit('localhost:3000/694919')
+  })
+
+  it('Should display the server error', () => {
+    cy.get('.error').should('exist')
+    cy.get('.error-content').should('contain', 'Uh oh.. This page doesn\'t exist. Please try again.')
+      .and('contain', "404 Not Found")
+  })
+
+  it('Should go away after Dismiss button is clicked', () => {
+    cy.get('.dismissButton').click().should('not.exist')
+  })
 })
