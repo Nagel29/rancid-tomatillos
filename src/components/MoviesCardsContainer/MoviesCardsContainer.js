@@ -7,9 +7,9 @@ const MoviesCardsContainer = ({ allMovieData, sortByTitle, sortByTitlePressed, s
     const allCards = allMovieData.map(movie => {
         return (
             <Card
-                id={movie.key}
-                key={movie.key}
-                poster_path={movie.posterPath}
+                id={movie.id}
+                key={movie.id}
+                posterPath={movie.posterPath}
                 title={movie.title}
                 rating={movie.rating}
             />
@@ -22,8 +22,8 @@ const MoviesCardsContainer = ({ allMovieData, sortByTitle, sortByTitlePressed, s
             <div className="sort">
                 <p className="sort-by">Sort by:</p>
                 <div className="sortButtons">
-                    <button className={sortByTitlePressed ? 'pressed' : undefined} onClick={() => sortByTitle(allMovieData)} aria-pressed={sortByTitlePressed}>Title (A-Z)</button>
-                    <button className={sortByRatingPressed ? 'pressed' : undefined} onClick={() => sortByRating(allMovieData)} aria-pressed={sortByRatingPressed}>Rating (Descending)</button>
+                    <button className={sortByTitlePressed ? 'pressed' : 'sort-button-title'} onClick={() => sortByTitle(allMovieData)} aria-pressed={sortByTitlePressed}>Title (A-Z)</button>
+                    <button className={sortByRatingPressed ? 'pressed' : 'sort-button-rating'} onClick={() => sortByRating(allMovieData)} aria-pressed={sortByRatingPressed}>Rating (Descending)</button>
                 </div>
             </div>
             <div className="MoviesCardsContainer">
