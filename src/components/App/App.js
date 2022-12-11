@@ -13,6 +13,7 @@ class App extends Component {
     super()
     this.state = {
       movies: [],
+      filteredMovies: [],
       showError: false,
       sortByTitlePressed: true,
       sortByRatingPressed: false,
@@ -59,14 +60,28 @@ class App extends Component {
     })
   }
 
+  filterByTitle = (searchInput) => {
+    const filteredMovies = this.state.movies.filter(movie => movie.title.includes(searchInput))
+    this.setState({ filteredMovies: filteredMovies })
+    console.log(this.state.filteredMovies)
+  }
+
   closeError = () => {
     this.setState({ showError: false })
   }
 
   render() {
-    const allMovieData = this.state.movies.map(movie => {
-      return { id: movie.id, posterPath: movie.posterPath, title: movie.title, rating: movie.rating }
-    })
+    let allMovieData;
+    if (this.state.filteredMovies.length > 0) {
+      allMovieData = this.state.filteredMovies.map(movie => {
+        return { id: movie.id, posterPath: movie.posterPath, title: movie.title, rating: movie.rating }
+      })
+    } else {
+      allMovieData = this.state.movies.map(movie => {
+        return { id: movie.id, posterPath: movie.posterPath, title: movie.title, rating: movie.rating }
+      })
+    }
+
     return (
       <BrowserRouter>
         <>
@@ -81,7 +96,7 @@ class App extends Component {
             }
             } />
             <Route exact path='/' render={() =>
-              <MoviesCardsContainer allMovieData={allMovieData} sortByTitle={this.sortByTitle} sortByTitlePressed={this.state.sortByTitlePressed} sortByRating={this.sortByRating} sortByRatingPressed={this.state.sortByRatingPressed} />
+              <MoviesCardsContainer allMovieData={allMovieData} sortByTitle={this.sortByTitle} sortByTitlePressed={this.state.sortByTitlePressed} sortByRating={this.sortByRating} sortByRatingPressed={this.state.sortByRatingPressed} filterByTitle={this.filterByTitle} />
             } />
           </main>
         </>
