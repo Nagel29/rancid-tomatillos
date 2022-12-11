@@ -7,9 +7,9 @@ const MoviesCardsContainer = ({ allMovieData, sortByTitle, sortByTitlePressed, s
     const allCards = allMovieData.map(movie => {
         return (
             <Card
-                id={movie.key}
-                key={movie.key}
-                poster_path={movie.posterPath}
+                id={movie.id}
+                key={movie.id}
+                posterPath={movie.posterPath}
                 title={movie.title}
                 rating={movie.rating}
             />

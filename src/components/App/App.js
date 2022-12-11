@@ -6,6 +6,7 @@ import './App.css';
 import fetchData from '../../apiCalls.js'
 import Error from '../Error/Error.js'
 import { Route, BrowserRouter, Link } from 'react-router-dom'
+import cleanData from '../../utilities.js';
 
 
 class App extends Component {
@@ -27,7 +28,9 @@ class App extends Component {
   displayAllMovies = () => {
     Promise.resolve(fetchData('movies'))
         .then(data => {
-        this.sortByTitle(data.movies)
+        const cleanedData = cleanData(data)
+          // console.log(cleanedData)
+        this.sortByTitle(cleanedData.movies)
         })
         .catch(error => {
           console.log(error)
@@ -62,7 +65,7 @@ class App extends Component {
 
   render() {
     const allMovieData = this.state.movies.map(movie => {
-      return {key: movie.id || movie.key, posterPath: movie['poster_path'] || movie.posterPath, title: movie.title, rating: movie['average_rating'] || movie.rating}
+      return {id: movie.id, posterPath: movie.posterPath, title: movie.title, rating: movie.rating}
     })
     return (
     <BrowserRouter>
