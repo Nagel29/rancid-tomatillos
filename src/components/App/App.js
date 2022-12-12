@@ -66,7 +66,7 @@ class App extends Component {
     } else if (!searchInput && this.state.sortByRatingPressed) {
       this.setState({ filteredMovies: this.state.movies }, () => this.sortByRating(this.state.filteredMovies))
     } else {
-      const filteredMovies = this.state.movies.filter(movie => movie.title.includes(searchInput))
+      const filteredMovies = this.state.movies.filter(movie => movie.title.toLowerCase().includes(searchInput.toLowerCase()))
       this.setState({ filteredMovies: filteredMovies })
     }
   }
