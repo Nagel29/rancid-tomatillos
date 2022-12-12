@@ -10,8 +10,15 @@ class Form extends Component {
         }
     }
 
+    componentDidMount() {
+        this.filterMovies();
+    }
+
     updateForm = (event) => {
-        this.setState({searchInput: event.target.value})
+        this.setState({searchInput: event.target.value}, this.filterMovies)
+    }
+
+    filterMovies() {
         this.props.filterByTitle(this.state.searchInput);
     }
 
@@ -22,7 +29,7 @@ class Form extends Component {
                 Search by Title:
                     <input
                         type='search'
-                        placeholder=''
+                        placeholder={this.state.searchInput}
                         name='search'
                         value={this.state.searchInput}
                         onChange={(event) => this.updateForm(event)}

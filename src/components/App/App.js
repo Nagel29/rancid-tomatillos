@@ -57,13 +57,16 @@ class App extends Component {
     this.setState({
       movies: data, movieDetails: {}, sortByTitlePressed: true,
       sortByRatingPressed: false
-    })
+    }, this.filterByTitle)
   }
 
   filterByTitle = (searchInput) => {
-    const filteredMovies = this.state.movies.filter(movie => movie.title.includes(searchInput))
-    this.setState({ filteredMovies: filteredMovies })
-    console.log(this.state.filteredMovies)
+    if (!searchInput) {
+      this.setState({ filteredMovies: this.state.movies })
+    } else {
+      const filteredMovies = this.state.movies.filter(movie => movie.title.includes(searchInput))
+      this.setState({ filteredMovies: filteredMovies })
+    }
   }
 
   closeError = () => {
@@ -71,16 +74,9 @@ class App extends Component {
   }
 
   render() {
-    let allMovieData;
-    if (this.state.filteredMovies.length > 0) {
-      allMovieData = this.state.filteredMovies.map(movie => {
+     let allMovieData = this.state.filteredMovies.map(movie => {
         return { id: movie.id, posterPath: movie.posterPath, title: movie.title, rating: movie.rating }
       })
-    } else {
-      allMovieData = this.state.movies.map(movie => {
-        return { id: movie.id, posterPath: movie.posterPath, title: movie.title, rating: movie.rating }
-      })
-    }
 
     return (
       <BrowserRouter>
