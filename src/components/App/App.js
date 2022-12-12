@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { Route, BrowserRouter, Link } from 'react-router-dom';
 import './App.css';
 import MoviesCardsContainer from '../MoviesCardsContainer/MoviesCardsContainer';
 import Details from '../Details/Details.js';
 import fetchData from '../../apiCalls.js';
 import Error from '../Error/Error.js';
+import { Route, BrowserRouter, Link } from 'react-router-dom'
+
 import cleanData from '../../utilities.js';
 
 
@@ -14,9 +15,11 @@ class App extends Component {
     this.state = {
       movies: [],
       filteredMovies: [],
-      showError: false,
+      showDetails: false,
+      errorStatus: 0,
+      errorText: "",
       sortByTitlePressed: true,
-      sortByRatingPressed: false,
+      sortByRatingPressed: false
     }
   }
 
@@ -30,9 +33,8 @@ class App extends Component {
         const cleanedData = cleanData(data)
         this.setState({movies: cleanedData.movies}, this.filterByTitle)
       })
-      .catch(error => {
-        console.log(error)
-        this.setState({ showError: true })
+      .catch(response => {
+          this.setState({errorStatus: response.status, errorText: response.statusText, showDetails: false})
       })
   }
 
@@ -72,7 +74,7 @@ class App extends Component {
   }
 
   closeError = () => {
-    this.setState({ showError: false })
+    this.setState({errorStatus: 200, errorText: ""})
   }
 
   render() {
@@ -83,9 +85,9 @@ class App extends Component {
     return (
       <BrowserRouter>
         <>
-          {this.state.showError && <Error closeError={this.closeError} />}
-          <header>
-            <Link style={{ color: 'inherit', textDecoration: 'inherit' }} to='/'><h1>Rancid Tomatillos</h1></Link>
+        {this.state.errorStatus > 400 && <Error status={this.state.errorStatus} text={this.state.errorText} closeError={this.closeError}/>}
+        <header>
+          <Link style={{color:'inherit', textDecoration: 'inherit'}} to='/'><h1>Rancid Tomatillos</h1></Link>
           </header>
           <main className="App">
             <Route path="/:movie" render={({ match }) => {

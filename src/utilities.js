@@ -1,5 +1,4 @@
 const cleanData = (data) => {
-    
     const cleanedData = data.movies.reduce((acc, movie) => {
         acc.movies.push({
             id: movie.id,

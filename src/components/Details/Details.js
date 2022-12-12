@@ -10,7 +10,8 @@ class Details extends Component {
     super(props)
     this.state = {
       movieDetails: {},
-      showError: false,
+      errorStatus: 200,
+      errorText: "",
       detailsOpen: false,
     }
   }
@@ -20,9 +21,8 @@ class Details extends Component {
       .then(data => {
         return this.setState({ movieDetails: data.movie, detailsOpen: true })
       })
-      .catch(error => {
-        console.log(error)
-        this.setState({ showError: true })
+      .catch(response => {
+        this.setState({errorStatus: response.status, errorText: response.statusText})
       })
   }
 
@@ -39,7 +39,7 @@ class Details extends Component {
     }
     return (
       <div className='main-details' aria-expanded={this.state.detailsOpen} style={styles}>
-        {this.state.showError && <Error closeError={this.props.closeError} />}
+      {this.state.errorStatus >= 400 && <Error status={this.state.errorStatus} text={this.state.errorText} closeError={this.props.closeError}/>}
         <div className='overlay'></div>
         <div className='details-container'>
           <img className='poster-img' name='posterPath' src={details['poster_path']} alt={`${details.title} poster image`}></img>
