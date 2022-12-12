@@ -28,6 +28,7 @@ const MoviesCardsContainer = ({ allMovieData, sortByTitle, sortByTitlePressed, s
                 </div>
                 <Form filterByTitle={filterByTitle}/>
             </div>
+            {!allCards.length && <h4>No movies found!</h4>}
             <div className="MoviesCardsContainer">
                 {allCards}
             </div>
