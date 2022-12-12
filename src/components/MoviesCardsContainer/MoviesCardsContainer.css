@@ -22,6 +22,14 @@
     color: black;
 }
 
+#sort-title-button,
+#sort-rating-button {
+    background-color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    box-shadow: 1px 3px 3px rgb(0 0 0 / 20%), -1px -1px 4px rgb(0 0 0 / 20%)
+}
+
 .sort-button {
     margin: 0px 10px 0px 0px;
 }
@@ -32,11 +40,14 @@
 
 .sortButtons {
     display: flex;
+    width: 300px;
+    justify-content: space-between;
 }
 
 .pressed {
-    opacity: .2;
+    opacity: .3;
 }
+
 
 h4 {
     font-size: 20px;

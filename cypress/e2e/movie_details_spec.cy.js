@@ -37,13 +37,13 @@ describe("Movie details page", () => {
 
 describe("Movie details server error display", () => {
   beforeEach(() => {
-    cy.intercept('https://rancid-tomatillos.herokuapp.com/api/v2/movies/694919', {
+    cy.intercept('https://rancid-tomatillos.herokuapp.com/api/v2/movies/694', {
       method: "GET"
     },
       {
         statusCode: 500,
       })
-    cy.visit('localhost:3000/694919')
+    cy.visit('localhost:3000/694')
   })
 
   it('Should display the server error', () => {
