@@ -23,8 +23,8 @@ const MoviesCardsContainer = ({ allMovieData, sortByTitle, sortByTitlePressed, s
             <div className="sort">
                 <p className="sort-by">Sort by:</p>
                 <div className="sortButtons">
-                    <button className={sortByTitlePressed ? 'pressed' : 'sort-button-title'} onClick={() => sortByTitle(allMovieData)} aria-pressed={sortByTitlePressed}>Title (A-Z)</button>
-                    <button className={sortByRatingPressed ? 'pressed' : 'sort-button-rating'} onClick={() => sortByRating(allMovieData)} aria-pressed={sortByRatingPressed}>Rating (Descending)</button>
+                    <button id='sort-title-button' className={sortByTitlePressed ? 'pressed' : 'sort-button-title'} onClick={() => sortByTitle(allMovieData)} aria-pressed={sortByTitlePressed}>Title (A-Z)</button>
+                    <button id='sort-rating-button' className={sortByRatingPressed ? 'pressed' : 'sort-button-rating'} onClick={() => sortByRating(allMovieData)} aria-pressed={sortByRatingPressed}>Rating (Descending)</button>
                 </div>
                 <Form filterByTitle={filterByTitle}/>
             </div>

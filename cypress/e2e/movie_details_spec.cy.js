@@ -16,7 +16,7 @@ describe("Movie details page", () => {
     cy.get('.details-container').should('contain', "Money Plane")
       .and('contain', 'Summary: A professional thief with $40 million in debt and his family\'s life on the line must commit one final heist - rob a futuristic airborne casino filled with the world\'s most dangerous criminals.')
       .and('contain', 'Release date: 2020-09-29')
-      .and('contain', 'Rating: 6.875')
+      .and('contain', 'Rating: 5')
       .and('contain', 'Movie Budget: $0')
       .and('contain', 'Box Office Revenue: $0')
       .and('contain', 'Run time: 82 mins')
