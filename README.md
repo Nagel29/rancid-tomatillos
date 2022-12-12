@@ -21,7 +21,6 @@ This project was built with:
 
 ### The App
 
-https://user-images.githubusercontent.com/108096652/207153322-c8c21922-4726-4813-b522-4b33aa1ca5f3.mp4
 
 
 ## Getting Started
