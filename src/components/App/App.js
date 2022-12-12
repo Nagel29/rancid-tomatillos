@@ -28,7 +28,7 @@ class App extends Component {
     Promise.resolve(fetchData('movies'))
       .then(data => {
         const cleanedData = cleanData(data)
-        this.sortByTitle(cleanedData.movies)
+        this.setState({movies: cleanedData.movies}, this.filterByTitle)
       })
       .catch(error => {
         console.log(error)
@@ -41,7 +41,7 @@ class App extends Component {
       return b.rating - a.rating;
     })
     this.setState({
-      movies: data, movieDetails: {}, sortByTitlePressed: false,
+      filteredMovies: data, movieDetails: {}, sortByTitlePressed: false,
       sortByRatingPressed: true
     })
   }
@@ -55,14 +55,16 @@ class App extends Component {
       }
     })
     this.setState({
-      movies: data, movieDetails: {}, sortByTitlePressed: true,
+      filteredMovies: data, movieDetails: {}, sortByTitlePressed: true,
       sortByRatingPressed: false
-    }, this.filterByTitle)
+    })
   }
 
   filterByTitle = (searchInput) => {
-    if (!searchInput) {
-      this.setState({ filteredMovies: this.state.movies })
+    if (!searchInput && this.state.sortByTitlePressed) {
+      this.setState({ filteredMovies: this.state.movies }, () => this.sortByTitle(this.state.filteredMovies))
+    } else if (!searchInput && this.state.sortByRatingPressed) {
+      this.setState({ filteredMovies: this.state.movies }, () => this.sortByRating(this.state.filteredMovies))
     } else {
       const filteredMovies = this.state.movies.filter(movie => movie.title.includes(searchInput))
       this.setState({ filteredMovies: filteredMovies })
