@@ -11,6 +11,7 @@
     padding: 0px 0px 15px 60px;
     display: flex;
     align-items: center;
+    justify-content: space-around;
     border-bottom: solid black 1px;
     color: black;
     margin-bottom: 20px;
@@ -29,8 +30,16 @@
     cursor: pointer;
 }
 
+.sortButtons {
+    display: flex;
+}
+
 .pressed {
     opacity: .2;
+}
+
+h4 {
+    font-size: 20px;
 }
 
 h2 {

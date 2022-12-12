@@ -12,14 +12,13 @@ class Details extends Component {
       movieDetails: {},
       errorStatus: 200,
       errorText: "",
-      detailsOpen: false,
     }
   }
 
   componentDidMount() {
     fetchData(`movies/${this.props.id}`)
       .then(data => {
-        return this.setState({ movieDetails: data.movie, detailsOpen: true })
+        return this.setState({ movieDetails: data.movie })
       })
       .catch(response => {
         this.setState({errorStatus: response.status, errorText: response.statusText})
@@ -38,7 +37,7 @@ class Details extends Component {
       height: "750px",
     }
     return (
-      <div className='main-details' aria-expanded={this.state.detailsOpen} style={styles}>
+      <div className='main-details' style={styles}>
       {this.state.errorStatus >= 400 && <Error status={this.state.errorStatus} text={this.state.errorText} closeError={this.props.closeError}/>}
         <div className='overlay'></div>
         <div className='details-container'>

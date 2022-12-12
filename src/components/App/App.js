@@ -14,6 +14,7 @@ class App extends Component {
     super()
     this.state = {
       movies: [],
+      filteredMovies: [],
       showDetails: false,
       errorStatus: 0,
       errorText: "",
@@ -28,19 +29,23 @@ class App extends Component {
 
   displayAllMovies = () => {
     Promise.resolve(fetchData('movies'))
-        .then(data => {
-          const cleanedData = cleanData(data)
-          this.sortByTitle(cleanedData.movies)})
-        .catch(response => {
+      .then(data => {
+        const cleanedData = cleanData(data)
+        this.setState({movies: cleanedData.movies}, this.filterByTitle)
+      })
+      .catch(response => {
           this.setState({errorStatus: response.status, errorText: response.statusText, showDetails: false})
-        })
+      })
   }
 
   sortByRating = (data) => {
     data.sort((a, b) => {
       return b.rating - a.rating;
     })
-    this.setState({movies: data, movieDetails: {}, showDetails: false, sortByTitlePressed: false, sortByRatingPressed: true})
+    this.setState({
+      filteredMovies: data, movieDetails: {}, sortByTitlePressed: false,
+      sortByRatingPressed: true
+    })
   }
 
   sortByTitle = (data) => {
@@ -52,9 +57,20 @@ class App extends Component {
       }
     })
     this.setState({
-      movies: data, movieDetails: {}, sortByTitlePressed: true,
+      filteredMovies: data, movieDetails: {}, sortByTitlePressed: true,
       sortByRatingPressed: false
     })
+  }
+
+  filterByTitle = (searchInput) => {
+    if (!searchInput && this.state.sortByTitlePressed) {
+      this.setState({ filteredMovies: this.state.movies }, () => this.sortByTitle(this.state.filteredMovies))
+    } else if (!searchInput && this.state.sortByRatingPressed) {
+      this.setState({ filteredMovies: this.state.movies }, () => this.sortByRating(this.state.filteredMovies))
+    } else {
+      const filteredMovies = this.state.movies.filter(movie => movie.title.toLowerCase().includes(searchInput.toLowerCase()))
+      this.setState({ filteredMovies: filteredMovies })
+    }
   }
 
   closeError = () => {
@@ -62,30 +78,29 @@ class App extends Component {
   }
 
   render() {
-    const allMovieData = this.state.movies.map(movie => {
-      return { id: movie.id, posterPath: movie.posterPath, title: movie.title, rating: movie.rating }
-    })
+     let allMovieData = this.state.filteredMovies.map(movie => {
+        return { id: movie.id, posterPath: movie.posterPath, title: movie.title, rating: movie.rating }
+      })
+
     return (
-    <BrowserRouter>
-      <>
+      <BrowserRouter>
+        <>
         {this.state.errorStatus > 400 && <Error status={this.state.errorStatus} text={this.state.errorText} closeError={this.closeError}/>}
         <header>
           <Link style={{color:'inherit', textDecoration: 'inherit'}} to='/'><h1>Rancid Tomatillos</h1></Link>
-          {this.state.error && <h4>{this.state.error}</h4>}
-        </header>
-        <main className="App">
-          <Route path="/:movie" render={({ match }) => {
-            const id = parseInt(match.params.movie)
-          return <Details id={id} closeError={this.closeError}/>
-        }
-        }/>
-          <Route exact path='/' render={ () => 
-          <MoviesCardsContainer allMovieData={allMovieData} sortByTitle={this.sortByTitle} sortByTitlePressed={this.state.sortByTitlePressed} sortByRating={this.sortByRating} sortByRatingPressed={this.state.sortByRatingPressed}/>
-        } 
-          />
-        </main>
-      </>
-    </BrowserRouter>
+          </header>
+          <main className="App">
+            <Route path="/:movie" render={({ match }) => {
+              const id = parseInt(match.params.movie)
+              return <Details id={id} closeError={this.closeError} />
+            }
+            } />
+            <Route exact path='/' render={() =>
+              <MoviesCardsContainer allMovieData={allMovieData} sortByTitle={this.sortByTitle} sortByTitlePressed={this.state.sortByTitlePressed} sortByRating={this.sortByRating} sortByRatingPressed={this.state.sortByRatingPressed} filterByTitle={this.filterByTitle} />
+            } />
+          </main>
+        </>
+      </BrowserRouter>
     )
   }
 }
