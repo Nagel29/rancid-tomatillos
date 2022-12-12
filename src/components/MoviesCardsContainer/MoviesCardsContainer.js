@@ -21,8 +21,9 @@ const MoviesCardsContainer = ({ allMovieData, sortByTitle, sortByTitlePressed, s
         <div>
             <h2 className='directions'>Click a poster to view more details!</h2>
             <div className="sort">
-                <p className="sort-by">Sort by:</p>
+                
                 <div className="sortButtons">
+                    <p className="sort-by">Sort by:</p>
                     <button id='sort-title-button' className={sortByTitlePressed ? 'pressed' : 'sort-button-title'} onClick={() => sortByTitle(allMovieData)} aria-pressed={sortByTitlePressed}>Title (A-Z)</button>
                     <button id='sort-rating-button' className={sortByRatingPressed ? 'pressed' : 'sort-button-rating'} onClick={() => sortByRating(allMovieData)} aria-pressed={sortByRatingPressed}>Rating (Descending)</button>
                 </div>

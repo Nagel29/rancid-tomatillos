@@ -26,7 +26,7 @@ class Form extends Component {
         return(
             <form>
                 <label>
-                Search by Title:
+                Search by Title: 
                     <input
                         type='search'
                         placeholder={this.state.searchInput}
@@ -41,3 +41,6 @@ class Form extends Component {
 
 export default Form
 
+Form.propTypes = {
+    filterByTitle: PropTypes.func.isRequired,
+}
