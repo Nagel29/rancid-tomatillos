@@ -4,7 +4,7 @@ import MoviesCardsContainer from '../MoviesCardsContainer/MoviesCardsContainer';
 import Details from '../Details/Details.js';
 import fetchData from '../../apiCalls.js';
 import Error from '../Error/Error.js';
-import { Route, BrowserRouter, Link } from 'react-router-dom'
+import { Route, BrowserRouter, Link, Switch } from 'react-router-dom'
 
 import cleanData from '../../utilities.js';
 
@@ -17,7 +17,6 @@ class App extends Component {
       filteredMovies: [],
       showDetails: false,
       errorStatus: 0,
-      errorText: "",
       sortByTitlePressed: true,
       sortByRatingPressed: false
     }
@@ -34,7 +33,7 @@ class App extends Component {
         this.setState({movies: cleanedData.movies}, this.filterByTitle)
       })
       .catch(response => {
-          this.setState({errorStatus: response.status, errorText: response.statusText, showDetails: false})
+          this.setState({errorStatus: response.status, showDetails: false})
       })
   }
 
@@ -74,7 +73,7 @@ class App extends Component {
   }
 
   closeError = () => {
-    this.setState({errorStatus: 200, errorText: ""})
+    this.setState({errorStatus: 200})
   }
 
   render() {
@@ -85,19 +84,23 @@ class App extends Component {
     return (
       <BrowserRouter>
         <>
-        {this.state.errorStatus > 400 && <Error status={this.state.errorStatus} text={this.state.errorText} closeError={this.closeError}/>}
         <header>
           <Link style={{color:'inherit', textDecoration: 'inherit'}} to='/'><h1>Rancid Tomatillos</h1></Link>
           </header>
           <main className="App">
-            <Route path="/:movie" render={({ match }) => {
-              const id = parseInt(match.params.movie)
-              return <Details id={id} closeError={this.closeError} />
-            }
-            } />
-            <Route exact path='/' render={() =>
-              <MoviesCardsContainer allMovieData={allMovieData} sortByTitle={this.sortByTitle} sortByTitlePressed={this.state.sortByTitlePressed} sortByRating={this.sortByRating} sortByRatingPressed={this.state.sortByRatingPressed} filterByTitle={this.filterByTitle} />
-            } />
+            <Switch>
+              <Route exact path="/:movie" render={({ match }) => {
+                const id = parseInt(match.params.movie)
+                return <Details id={id} closeError={this.closeError} />
+              }
+              } />
+              <Route exact path='/' render={() =>
+                <MoviesCardsContainer allMovieData={allMovieData} sortByTitle={this.sortByTitle} sortByTitlePressed={this.state.sortByTitlePressed} sortByRating={this.sortByRating} sortByRatingPressed={this.state.sortByRatingPressed} filterByTitle={this.filterByTitle} />
+              } />
+              <Route> 
+                <Error status={this.state.errorStatus} closeError={this.closeError}/>
+              </Route>
+            </Switch>
           </main>
         </>
       </BrowserRouter>

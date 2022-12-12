@@ -10,8 +10,7 @@ class Details extends Component {
     super(props)
     this.state = {
       movieDetails: {},
-      errorStatus: 200,
-      errorText: "",
+      errorStatus: 200
     }
   }
 
@@ -21,7 +20,7 @@ class Details extends Component {
         return this.setState({ movieDetails: data.movie })
       })
       .catch(response => {
-        this.setState({errorStatus: response.status, errorText: response.statusText})
+        this.setState({errorStatus: response.status})
       })
   }
 
@@ -38,7 +37,7 @@ class Details extends Component {
     }
     return (
       <div className='main-details' style={styles}>
-      {this.state.errorStatus >= 400 && <Error status={this.state.errorStatus} text={this.state.errorText} closeError={this.props.closeError}/>}
+        {this.state.errorStatus >= 400 && <Error status={this.state.errorStatus} closeError={this.props.closeError}/>}
         <div className='overlay'></div>
         <div className='details-container'>
           <img className='poster-img' name='posterPath' src={details['poster_path']} alt={`${details.title} poster image`}></img>

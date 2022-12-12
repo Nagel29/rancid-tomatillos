@@ -4,7 +4,7 @@ import './Error.css'
 import errorIcon from '../../images/alert-icon.png';
 import PropType from 'prop-types'
 
-const Error = ( { closeError, status, text }) => {
+const Error = ( { closeError, status}) => {
   if(status >= 500) { 
     return (
       <div className="main-overlay">
@@ -24,7 +24,7 @@ const Error = ( { closeError, status, text }) => {
         <div className="error">
           <img src={errorIcon} className="error-icon"></img>
           <div className="error-content">
-            <h2>{status} {text}</h2>
+            <h2>404 Not Found</h2>
             <h3>Uh oh.. This page doesn't exist. Please try again.</h3>
           </div>
           <Link to='/' className="buttonLink" onClick={() => closeError()}><button className="dismissButton">Dismiss</button></Link>
