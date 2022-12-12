@@ -84,6 +84,7 @@ class App extends Component {
     return (
       <BrowserRouter>
         <>
+        {this.state.errorStatus > 400 && <Error status={this.state.errorStatus} closeError={this.closeError}/>}
         <header>
           <Link style={{color:'inherit', textDecoration: 'inherit'}} to='/'><h1>Rancid Tomatillos</h1></Link>
           </header>
