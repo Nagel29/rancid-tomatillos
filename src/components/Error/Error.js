@@ -11,7 +11,7 @@ const Error = ( { closeError, status}) => {
         <div className="error">
           <img src={errorIcon} className="error-icon"></img>
           <div className="error-content">
-            <h2>Oops! Looks like there as a problem.</h2>
+            <h2>Oops! Looks like there was a problem.</h2>
             <h3>Please try again later.</h3>
           </div>
           <Link to='/' className="buttonLink" onClick={() => closeError()}><button className="dismissButton">Dismiss</button></Link>
