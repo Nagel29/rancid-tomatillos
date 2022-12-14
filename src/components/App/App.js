@@ -82,29 +82,27 @@ class App extends Component {
       })
 
     return (
-      <BrowserRouter>
-        <>
-        {this.state.errorStatus > 400 && <Error status={this.state.errorStatus} closeError={this.closeError}/>}
-        <header>
-          <Link style={{color:'inherit', textDecoration: 'inherit'}} to='/'><h1>Rancid Tomatillos</h1></Link>
-          </header>
-          <main className="App">
-            <Switch>
-              <Route exact path="/:movie" render={({ match }) => {
-                const id = parseInt(match.params.movie)
-                return <Details id={id} closeError={this.closeError} />
-              }
-              } />
-              <Route exact path='/' render={() =>
-                <MoviesCardsContainer allMovieData={allMovieData} sortByTitle={this.sortByTitle} sortByTitlePressed={this.state.sortByTitlePressed} sortByRating={this.sortByRating} sortByRatingPressed={this.state.sortByRatingPressed} filterByTitle={this.filterByTitle} />
-              } />
-              <Route> 
-                <Error status={this.state.errorStatus} closeError={this.closeError}/>
-              </Route>
-            </Switch>
-          </main>
-        </>
-      </BrowserRouter>
+      <>
+      {this.state.errorStatus > 400 && <Error status={this.state.errorStatus} closeError={this.closeError}/>}
+      <header>
+        <Link style={{color:'inherit', textDecoration: 'inherit'}} to='/'><h1>Rancid Tomatillos</h1></Link>
+        </header>
+        <main className="App">
+          <Switch>
+            <Route exact path="/:movie" render={({ match }) => {
+              const id = parseInt(match.params.movie)
+              return <Details id={id} closeError={this.closeError} />
+            }
+            } />
+            <Route exact path='/' render={() =>
+              <MoviesCardsContainer allMovieData={allMovieData} sortByTitle={this.sortByTitle} sortByTitlePressed={this.state.sortByTitlePressed} sortByRating={this.sortByRating} sortByRatingPressed={this.state.sortByRatingPressed} filterByTitle={this.filterByTitle} />
+            } />
+            <Route> 
+              <Error status={this.state.errorStatus} closeError={this.closeError}/>
+            </Route>
+          </Switch>
+        </main>
+      </>
     )
   }
 }
