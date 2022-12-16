@@ -5,7 +5,7 @@ import App from './components/App/App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 
-const router = <BrowserRouter basename='/rancid-tomatillos'> <App /> </BrowserRouter>;
+const router = <BrowserRouter> <App /> </BrowserRouter>;
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(router);
