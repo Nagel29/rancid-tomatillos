@@ -1,6 +1,5 @@
 {
   "name": "rancid-tomatillos",
-  "homepage": "https://nagel29.github.io/rancid-tomatillos",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -20,8 +19,6 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "cypress": "cypress open",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
